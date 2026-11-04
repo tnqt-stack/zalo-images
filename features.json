@@ -3,6 +3,7 @@
   "greeting": "Chào bạn, hiện tại bot không có tính năng trò chuyện. Công việc chính của bot là",
   "features": [
     "Cập nhật tin tức buổi sáng",
+    "Thống kê giữa phiên lúc 11h30",
     "Thống kê thị trường qua market lens buổi tối",
     "Gửi báo cáo thị trường tuần vào sáng Chủ nhật",
     "Báo tín hiệu Mua/Bán mới trong phiên và tổng hợp lúc 15:30",
