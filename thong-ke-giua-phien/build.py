@@ -9,8 +9,8 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).parent
-W = 1400
-SCALE = 1.3
+W = 2400
+SCALE = 1.75
 
 
 def vn(x, d=0, sign=False):
@@ -93,7 +93,7 @@ def price_chart(data):
     pts = [(int(t[:2]) * 60 + int(t[3:5]), v) for t, v in data["series"]]
     ix = data["index"]
     ref = ix["ref"]
-    w, h, l, r, t, b = 1320, 250, 16, 120, 14, 38
+    w, h, l, r, t, b = 1108, 300, 16, 120, 14, 38
 
     def X(m):  # trục gộp nghỉ trưa: 09:15 -> 14:45
         m2 = m if m <= 690 else m - 90
@@ -136,7 +136,7 @@ def liq_chart(liq):
     n = len(liq["curr"])
     s = 4
     avg = [(a + b + c) / 3 for a, b, c in zip(liq["week1"], liq["week2"], liq["month"])]
-    w, h, l, r, t, b = 560, 330, 74, 18, 14, 42
+    w, h, l, r, t, b = 520, 450, 74, 18, 14, 42
     top = max(max(liq["curr"]), max(liq["prev"]), max(avg)) * 1.06
 
     def X(i):
@@ -226,7 +226,7 @@ def heat_col(p):
 
 
 def heatmap(uni, q):
-    W_, H_, strip = 1288, 560, 32
+    W_, H_, strip = 1108, 926, 34
     tot = sum(sum(g.values()) for g in uni.values())
     gs = sorted(uni.items(), key=lambda kv: -sum(kv[1].values()))
     k = W_ * H_ / tot
@@ -334,6 +334,7 @@ def render(day):
     html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê giữa phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
 <header class="top"><img src="../assets/logo.png" alt="WeHa"><div class="meta"><span class="tag">Thống kê giữa phiên</span><b>Chốt phiên sáng · {data["time"]}</b><span>{dow}, {dstr}</span></div></header>
 <h1 class="h1">{h1}</h1>
+<div class="cols"><div class="col">
 <section class="kpi">
 <div class="card-hero"><div class="eyebrow">VN-Index · {data["time"]}</div><div class="display-score">{vn(ix["value"],2)}</div>
 <div class="hrow"><span class="chg {cls(chg)} big">{vn(chg,2,True)} ({vn(chp,2,True)}%)</span><span class="badge b-{bcls}">{badge}</span></div>
@@ -348,9 +349,10 @@ def render(day):
 <h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · so sánh cùng thời điểm {data["time"]}</p>
 <div class="card liq"><div class="lc"><div class="lg"><span><i style="background:var(--ink)"></i>Hôm nay</span><span><i style="background:var(--gold)"></i>Hôm qua</span><span><i class="dash"></i>TB 3 phiên*</span></div>
 <div class="cap">Giá trị khớp lệnh lũy kế, tỷ đồng</div>{liq_chart(liq)}</div>
-<div class="lr"><div class="ct">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}
-<p class="fn">% là hôm nay so với mốc đó.</p></div><div class="lr"><div class="ct">KL phiên sáng, triệu cp**</div>{cmp_rows([("Hôm nay", kl, None), ("Hôm qua", klp, (kl/klp-1)*100), ("TB 5 phiên", kl5, (kl/kl5-1)*100), (f"TB {n20} phiên", kl20, (kl/kl20-1)*100)])}</div>
-<div class="how-to-read wide"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* Cùng giờ của 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Gồm thỏa thuận.</span></div></div>
+<div class="lrs"><div class="lr"><div class="ct">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}
+</div><div class="lr"><div class="ct">KL phiên sáng, triệu cp**</div>{cmp_rows([("Hôm nay", kl, None), ("Hôm qua", klp, (kl/klp-1)*100), ("TB 5 phiên", kl5, (kl/kl5-1)*100), (f"TB {n20} phiên", kl20, (kl/kl20-1)*100)])}</div></div>
+<div class="how-to-read wide"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* Cùng giờ của 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Gồm thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
+</div><div class="col">
 <h2 class="sh"><em>03</em>{upn} trong 60 mã vốn hóa lớn đang tăng, {dnn} mã giảm</h2><p class="sub">60 mã lớn nhất HOSE · diện tích theo vốn hóa, màu theo % thay đổi</p>
 <div class="card">{heatmap(uni, q)}<div class="scale"><span>−4%</span><i class="h3d"></i><i class="h2d"></i><i class="h1d"></i><i class="h0"></i><i class="h1u"></i><i class="h2u"></i><i class="h3u"></i><span>+4%</span></div></div>
 <h2 class="sh"><em>04</em>{lift} nâng chỉ số nhiều nhất, {drag} đè mạnh nhất</h2><p class="sub">Độ rộng tính trên 60 mã vốn hóa lớn HOSE · điểm đóng góp theo VCBS</p>
@@ -362,6 +364,7 @@ def render(day):
 <div class="card"><div class="ct">Kéo / đè chỉ số, điểm</div>{contrib_chart(ct)}
 <p class="ln rest">Các mã còn lại cộng dồn: <b>{vn(rest,2,True)} điểm</b></p>
 <p class="ln">{dv["name"]}: <b class="chg {cls(dvc)}">{vn(dv["price"],1)} ({vn(dvc,2,True)}%)</b> · basis {vn(basis,1,True)}</p></div></section>
+</div></div>
 <footer class="foot"><div><b>WeHa - Wealth and Happiness</b> · weha.com.vn<br>Kỷ luật đầu tư bằng dữ liệu</div>
 <div class="r">Nguồn: {data.get("source", "VCBS")} · cập nhật {data["asof"]} {dstr}. Số liệu trong phiên là tạm tính, chỉ để tham khảo, không phải khuyến nghị đầu tư.</div></footer>
 </main></body></html>'''
