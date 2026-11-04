@@ -245,8 +245,9 @@ def heatmap(uni, q):
             if fs < 17:
                 fs = min(19, tw / 2.15, th / 1.25)
             row = not show and tw >= fs * 5.2
+            rowc = " row" if row else ""
             sub = f'<small style="font-size:{max(15,fs*.6):.0f}px">{vn(p,2,True)}%</small>' if show or row else ""
-            html += (f'<div class="ht {heat_col(p)}{' row' if row else ''}" style="left:{tx:.1f}px;top:{ty:.1f}px;width:{tw:.1f}px;height:{th:.1f}px">'
+            html += (f'<div class="ht {heat_col(p)}{rowc}" style="left:{tx:.1f}px;top:{ty:.1f}px;width:{tw:.1f}px;height:{th:.1f}px">'
                      f'<span style="font-size:{fs:.0f}px">{s}</span>{sub}</div>')
         html += "</div>"
     return f'<div class="heat" style="width:{W_}px;height:{H_}px">{html}</div>'
