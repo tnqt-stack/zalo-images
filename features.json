@@ -4,10 +4,10 @@
   "features": [
     "Cập nhật tin tức buổi sáng lúc 7h35",
     "Thống kê giữa phiên lúc 11h30",
+    "Báo tín hiệu Mua/Bán mới trong phiên và tổng hợp lúc 15h30",
+    "Tổng hợp tin doanh nghiệp đáng chú ý lúc 17h30",
     "Thống kê thị trường qua market lens buổi tối lúc 19h05",
-    "Gửi báo cáo thị trường tuần vào sáng Chủ nhật lúc 8h00",
-    "Báo tín hiệu Mua/Bán mới trong phiên và tổng hợp lúc 15:30",
-    "Tổng hợp tin doanh nghiệp đáng chú ý lúc 17h30"
+    "Gửi báo cáo thị trường tuần vào sáng Chủ nhật lúc 8h00"
   ],
   "footer": "Và các tính năng khác đang được xây dựng."
 }
