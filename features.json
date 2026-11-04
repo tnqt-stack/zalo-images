@@ -2,10 +2,10 @@
   "_ghi_chu": "Câu trả lời của bot Zalo khi được tag. Sửa file này trên GitHub (thêm/bớt dòng trong 'features') là bot tự cập nhật sau tối đa ~5 phút, không cần deploy.",
   "greeting": "Chào bạn, hiện tại bot không có tính năng trò chuyện. Công việc chính của bot là",
   "features": [
-    "Cập nhật tin tức buổi sáng",
+    "Cập nhật tin tức buổi sáng lúc 7h35",
     "Thống kê giữa phiên lúc 11h30",
-    "Thống kê thị trường qua market lens buổi tối",
-    "Gửi báo cáo thị trường tuần vào sáng Chủ nhật",
+    "Thống kê thị trường qua market lens buổi tối lúc 19h05",
+    "Gửi báo cáo thị trường tuần vào sáng Chủ nhật lúc 8h00",
     "Báo tín hiệu Mua/Bán mới trong phiên và tổng hợp lúc 15:30",
     "Tổng hợp tin doanh nghiệp đáng chú ý lúc 17h30"
   ],
