@@ -93,7 +93,7 @@ def price_chart(data):
     pts = [(int(t[:2]) * 60 + int(t[3:5]), v) for t, v in data["series"]]
     ix = data["index"]
     ref = ix["ref"]
-    w, h, l, r, t, b = 1108, 300, 16, 120, 14, 38
+    w, h, l, r, t, b = 2288, 340, 16, 150, 14, 42
 
     def X(m):  # trục gộp nghỉ trưa: 09:15 -> 14:45
         m2 = m if m <= 690 else m - 90
@@ -110,25 +110,44 @@ def price_chart(data):
     yr = Y(ref)
     xe = X(pts[-1][0])
     ye = Y(pts[-1][1])
+    xr = w - r
     lowp = min(pts, key=lambda p: p[1])
     ticks = "".join(
         f'<text x="{X(m):.1f}" y="{h-10}" text-anchor="middle" class="ax">{s}</text>'
         for m, s in [(570, "09:30"), (600, "10:00"), (630, "10:30"), (660, "11:00"), (690, "11:30")])
+    step = next((s for s in (5, 10, 20, 50, 100) if (hi - lo) / s <= 5), 200)
+    grid = ""
+    for v in range(int(lo // step + 1) * step, int(hi) + 1, step):
+        grid += f'<line x1="{l}" x2="{xr}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="var(--border)"/>'
+        if abs(Y(v) - ye) > 34:  # nhãn trục không chui dưới ô giá chốt
+            grid += f'<text x="{xr+14}" y="{Y(v)+8:.1f}" class="ax">{vn(v)}</text>'
     xa = X(690) + 16
+    # Nhãn tự tránh nhau: đổi phía khi sát đường tham chiếu hoặc mép khung
+    ny = (t + h - b) / 2 + 8
+    if abs(ny - 8 - yr) < 40:
+        ny -= 56
+    ry = yr - 12 if yr - 40 > t else yr + 32
+    lx, ly = X(lowp[0]), Y(lowp[1])
+    dy = ly + 38
+    if abs(dy - 8 - yr) < 26 or dy > h - b - 4:
+        dy = ly - 20
+    da, dx = ("end", lx + 10) if lx > X(690) - 300 else ("start", lx - 8)
     return f'''<svg viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="VN-Index theo nến 5 phút">
 <defs><clipPath id="ab"><rect x="0" y="0" width="{w}" height="{yr:.1f}"/></clipPath>
 <clipPath id="be"><rect x="0" y="{yr:.1f}" width="{w}" height="{h}"/></clipPath></defs>
-<rect x="{xa:.1f}" y="{t}" width="{w-r-xa:.1f}" height="{h-t-b}" rx="8" fill="var(--surface-soft)"/>
-<text x="{(xa+w-r)/2:.1f}" y="{h-b-24:.1f}" text-anchor="middle" class="note">Phiên chiều 13:00 – 14:45</text>
+<rect x="{xa:.1f}" y="{t}" width="{xr-xa:.1f}" height="{h-t-b}" rx="8" fill="var(--surface-soft)"/>
+{grid}<text x="{(xa+xr)/2:.1f}" y="{ny:.1f}" text-anchor="middle" class="note">Phiên chiều 13:00 – 14:45</text>
 <path d="{area}" fill="var(--zone-up-fill)" clip-path="url(#ab)"/>
 <path d="{area}" fill="var(--zone-down-fill)" clip-path="url(#be)"/>
-<line x1="{l}" x2="{w-r}" y1="{yr:.1f}" y2="{yr:.1f}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 6"/>
+<line x1="{l}" x2="{xr}" y1="{yr:.1f}" y2="{yr:.1f}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 6"/>
+<line x1="{xe:.1f}" x2="{xr+10}" y1="{ye:.1f}" y2="{ye:.1f}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
 <path d="{path}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
-<circle cx="{X(lowp[0]):.1f}" cy="{Y(lowp[1]):.1f}" r="7" fill="var(--down)" stroke="#fff" stroke-width="2"/>
-<text x="{X(lowp[0])-8:.1f}" y="{Y(lowp[1])+32:.1f}" class="lab" fill="var(--down)">Đáy {vn(ix['low'],2)}</text>
+<circle cx="{lx:.1f}" cy="{ly:.1f}" r="7" fill="var(--down)" stroke="#fff" stroke-width="2"/>
+<text x="{dx:.1f}" y="{dy:.1f}" text-anchor="{da}" class="lab" fill="var(--down)">Đáy {vn(ix['low'],2)}</text>
 <circle cx="{xe:.1f}" cy="{ye:.1f}" r="8" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
-<text x="{xe+16:.1f}" y="{ye+8:.1f}" class="lab" fill="var(--ink)">{vn(pts[-1][1],2)}</text>
-<text x="{w-r-8}" y="{yr+30:.1f}" text-anchor="end" class="lab" fill="var(--gold-strong)">Tham chiếu {vn(ref,2)}</text>
+<rect x="{xr+10}" y="{ye-23:.1f}" width="{r-12}" height="46" rx="8" fill="var(--ink)"/>
+<text x="{xr+10+(r-12)/2:.1f}" y="{ye+8:.1f}" text-anchor="middle" class="lab" fill="#fff">{vn(pts[-1][1],2)}</text>
+<text x="{xr-14}" y="{ry:.1f}" text-anchor="end" class="lab" fill="var(--gold-strong)">Tham chiếu {vn(ref,2)}</text>
 {ticks}</svg>'''
 
 
@@ -136,7 +155,7 @@ def liq_chart(liq):
     n = len(liq["curr"])
     s = 4
     avg = [(a + b + c) / 3 for a, b, c in zip(liq["week1"], liq["week2"], liq["month"])]
-    w, h, l, r, t, b = 520, 450, 74, 18, 14, 42
+    w, h, l, r, t, b = 1150, 310, 84, 18, 14, 42
     top = max(max(liq["curr"]), max(liq["prev"]), max(avg)) * 1.06
 
     def X(i):
@@ -226,7 +245,7 @@ def heat_col(p):
 
 
 def heatmap(uni, q):
-    W_, H_, strip = 1108, 926, 34
+    W_, H_, strip = 2288, 660, 34
     tot = sum(sum(g.values()) for g in uni.values())
     gs = sorted(uni.items(), key=lambda kv: -sum(kv[1].values()))
     k = W_ * H_ / tot
@@ -240,7 +259,7 @@ def heatmap(uni, q):
         cells = sorted(((s, v * sc) for s, v in g.items()), key=lambda a: -a[1])
         for s, tx, ty, tw, th in squarify(cells, 0, strip, w, ih):
             p = pct(q, s)
-            fs = min(64, tw / 3.3, th / 2.5)
+            fs = min(80, tw / 3.3, th / 2.5)
             show = fs >= 17
             if fs < 17:
                 fs = min(19, tw / 2.15, th / 1.25)
@@ -332,18 +351,18 @@ def render(day):
     lead = "Bên tăng áp đảo" if up > dn * 1.3 else "Bên giảm áp đảo" if dn > up * 1.3 else "Cân bằng"
     netlist = ", ".join(s for s, _ in (fr["sell"] if net < 0 else fr["buy"])[:3])
     html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê giữa phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
-<header class="top"><img src="../assets/logo.png" alt="WeHa"><div class="meta"><span class="tag">Thống kê giữa phiên</span><b>Chốt phiên sáng · {data["time"]}</b><span>{dow}, {dstr}</span></div></header>
+<header class="top"><img src="../assets/logo.png" alt="WeHa"><div class="meta"><b>Giữa phiên · {data["time"]}</b><span>{dow}, {dstr}</span></div></header>
+<div class="band">Thống kê giữa phiên</div>
+<div class="kick">Chốt phiên sáng · {dow} {dstr}</div>
 <h1 class="h1">{h1}</h1>
-<div class="cols"><div class="col">
+<p class="lede"><b>Cách đọc:</b> {hero_read}</p>
 <section class="kpi">
 <div class="card-hero"><div class="eyebrow">VN-Index · {data["time"]}</div><div class="display-score">{vn(ix["value"],2)}</div>
-<div class="hrow"><span class="chg {cls(chg)} big">{vn(chg,2,True)} ({vn(chp,2,True)}%)</span><span class="badge b-{bcls}">{badge}</span></div>
-<div class="how-to-read"><b>Cách đọc:</b> {hero_read}</div></div>
-<div class="tiles">
+<div class="hrow"><span class="chg {cls(chg)} big">{vn(chg,2,True)} ({vn(chp,2,True)}%)</span><span class="badge b-{bcls}">{badge}</span></div></div>
 <div class="stat-tile"><div class="stat-label">Biên độ phiên sáng</div><div class="stat-value">{vn(ix["high"]-ix["low"],1)}<span class="unit">điểm</span></div><div class="stat-sub">{vn(ix["low"],2)} – {vn(ix["high"],2)}</div></div>
 <div class="stat-tile"><div class="stat-label">Giá trị khớp lệnh</div><div class="stat-value">{vn(cur)}<span class="unit">tỷ đồng</span></div><div class="stat-sub">Thỏa thuận thêm {vn(liq["put_through"])} tỷ đồng</div></div>
 <div class="stat-tile"><div class="stat-label">Khối ngoại khớp lệnh</div><div class="stat-value {cls(net)}">{vn(net,0,True)}<span class="unit">tỷ đồng</span></div><div class="stat-sub">{"Bán ròng" if net < 0 else "Mua ròng"} mạnh {netlist}</div></div>
-</div></section>
+</section>
 <h2 class="sh"><em>01</em>Diễn biến trong phiên</h2><p class="sub">VN-Index theo nến 5 phút · nét đứt: tham chiếu</p>
 <div class="card">{price_chart(data)}</div>
 <h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · so sánh cùng thời điểm {data["time"]}</p>
@@ -352,7 +371,6 @@ def render(day):
 <div class="lrs"><div class="lr"><div class="ct">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}
 </div><div class="lr"><div class="ct">KL phiên sáng, triệu cp**</div>{cmp_rows([("Hôm nay", kl, None), ("Hôm qua", klp, (kl/klp-1)*100), ("TB 5 phiên", kl5, (kl/kl5-1)*100), (f"TB {n20} phiên", kl20, (kl/kl20-1)*100)])}</div></div>
 <div class="how-to-read wide"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* Cùng giờ của 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Gồm thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
-</div><div class="col">
 <h2 class="sh"><em>03</em>{upn} trong 60 mã vốn hóa lớn đang tăng, {dnn} mã giảm</h2><p class="sub">60 mã lớn nhất HOSE · diện tích theo vốn hóa, màu theo % thay đổi</p>
 <div class="card">{heatmap(uni, q)}<div class="scale"><span>−4%</span><i class="h3d"></i><i class="h2d"></i><i class="h1d"></i><i class="h0"></i><i class="h1u"></i><i class="h2u"></i><i class="h3u"></i><span>+4%</span></div></div>
 <h2 class="sh"><em>04</em>{lift} nâng chỉ số nhiều nhất, {drag} đè mạnh nhất</h2><p class="sub">Độ rộng tính trên 60 mã vốn hóa lớn HOSE · điểm đóng góp theo VCBS</p>
@@ -364,7 +382,6 @@ def render(day):
 <div class="card"><div class="ct">Kéo / đè chỉ số, điểm</div>{contrib_chart(ct)}
 <p class="ln rest">Các mã còn lại cộng dồn: <b>{vn(rest,2,True)} điểm</b></p>
 <p class="ln">{dv["name"]}: <b class="chg {cls(dvc)}">{vn(dv["price"],1)} ({vn(dvc,2,True)}%)</b> · basis {vn(basis,1,True)}</p></div></section>
-</div></div>
 <footer class="foot"><div><b>WeHa - Wealth and Happiness</b> · weha.com.vn<br>Kỷ luật đầu tư bằng dữ liệu</div>
 <div class="r">Nguồn: {data.get("source", "VCBS")} · cập nhật {data["asof"]} {dstr}. Số liệu trong phiên là tạm tính, chỉ để tham khảo, không phải khuyến nghị đầu tư.</div></footer>
 </main></body></html>'''
@@ -386,7 +403,7 @@ async def shot(html, png):
         await p.wait_for_timeout(300)
         bad = await p.evaluate("[...document.fonts].filter(f=>f.status!='loaded').map(f=>f.family)")
         h = await p.evaluate("document.documentElement.scrollHeight")
-        over = await p.evaluate("[...document.querySelectorAll('.ct,.ln,.h1,.sh,.stat-sub,.sub')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
+        over = await p.evaluate("[...document.querySelectorAll('.ct,.ln,.h1,.sh,.stat-sub,.sub,.lede')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
         await p.screenshot(path=str(png), full_page=True)
         await b.close()
     print(f"OK {png.name}: {int(W*SCALE)}x{int(h*SCALE)}px, cao/rộng {h/W:.2f}", "| FONT LOI:" if bad else "", bad or "", "| TRAN:" if over else "", over or "")
