@@ -1,0 +1,165 @@
+{
+ "date": "05/11/2026",
+ "items": [
+  {
+   "ticker": "PGD",
+   "exchange": "HOSE",
+   "price": 20.6,
+   "change": 0.49,
+   "tag": "KQKD",
+   "title": "PGD: LNST quý 3 tăng 257.2%, 9 tháng vượt kế hoạch năm",
+   "summary": "Quý 3/2026 doanh thu thuần 3,303 tỷ đồng (+6.8%), LNST 265 tỷ đồng (+257.2%). Lũy kế 9 tháng LNST 285.2 tỷ đồng (+105.9%), đạt 137.9% kế hoạch năm.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "FCN",
+   "exchange": "HOSE",
+   "price": 11.15,
+   "change": 0.45,
+   "tag": "KQKD",
+   "title": "FECON: LNST quý 3 tăng 517.5% so với cùng kỳ",
+   "summary": "Quý 3/2026 doanh thu thuần 1,858 tỷ đồng (+62.6%), LNST 90.3 tỷ đồng (+517.5%). Lũy kế 9 tháng LNST 150.2 tỷ đồng (+405.1%), đạt 60.1% kế hoạch năm.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "DPM",
+   "exchange": "HOSE",
+   "price": 19.65,
+   "change": -0.76,
+   "tag": "KQKD",
+   "title": "Đạm Phú Mỹ nâng kế hoạch lợi nhuận sau thuế năm 2026",
+   "summary": "DPM điều chỉnh tăng 112% kế hoạch lợi nhuận sau thuế năm 2026 sau khi lãi 9 tháng đã vượt kế hoạch năm ban đầu.",
+   "source": "VnEconomy"
+  },
+  {
+   "ticker": "DCM",
+   "exchange": "HOSE",
+   "price": 32.4,
+   "change": -1.82,
+   "tag": "KQKD",
+   "title": "Phân bón Cà Mau nâng mục tiêu lợi nhuận lên gần 2,200 tỷ đồng",
+   "summary": "Lãi 9 tháng vượt kế hoạch, DCM nâng mục tiêu lợi nhuận năm 2026 thêm gần 1,000 tỷ đồng, lên gần 2,200 tỷ đồng.",
+   "source": "Mekong ASEAN"
+  },
+  {
+   "ticker": "HPG",
+   "exchange": "HOSE",
+   "price": 21.5,
+   "change": -0.92,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "Hòa Phát: người liên quan nội bộ gom thành công 10 triệu cổ phiếu",
+   "summary": "Con trai Chủ tịch Trần Đình Long (Trần Vũ Minh) báo cáo kết quả mua thành công 10 triệu cổ phiếu HPG.",
+   "source": "HOSE, KTCK"
+  },
+  {
+   "ticker": "TLG",
+   "exchange": "HOSE",
+   "price": 54.3,
+   "change": 0.37,
+   "tag": "Nhân sự",
+   "title": "Thiên Long thay 5 thành viên HĐQT, ông Cô Gia Thọ làm Chủ tịch danh dự",
+   "summary": "HĐQT tiếp nhận đơn từ nhiệm của các thành viên HĐQT; công ty chuẩn bị ĐHĐCĐ bất thường 2026 để thay 5 thành viên HĐQT.",
+   "source": "HOSE, TNCK"
+  },
+  {
+   "ticker": "ORS",
+   "exchange": "HOSE",
+   "price": 14.5,
+   "change": -2.03,
+   "tag": "Nhân sự",
+   "title": "Chứng khoán Tiên Phong thay Tổng giám đốc sau 6 tháng",
+   "summary": "ORS công bố thay đổi nhân sự: thay Tổng giám đốc mới chỉ sau 6 tháng.",
+   "source": "HOSE, Người Đưa Tin"
+  },
+  {
+   "ticker": "DLR",
+   "exchange": "HOSE",
+   "price": null,
+   "change": null,
+   "tag": "Phát hành",
+   "title": "Địa ốc Đà Lạt huy động thành công 500 tỷ đồng chào bán riêng lẻ",
+   "summary": "DLR hoàn tất chào bán riêng lẻ cho 10 nhà đầu tư cá nhân, thu về 500 tỷ đồng.",
+   "source": "TNCK"
+  },
+  {
+   "ticker": "KOS",
+   "exchange": "HOSE",
+   "price": 3.95,
+   "change": 0.51,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "KOSY: Chủ tịch và bên liên quan bị bán giải chấp hơn 48 triệu cổ phiếu",
+   "summary": "CTCK đã bán giải chấp hơn 48 triệu cổ phiếu KOS của Chủ tịch và bên liên quan. Ông Nguyễn Việt Cường bán 12.93 triệu cổ phiếu, tỷ lệ sở hữu từ 33.09% xuống 27.12%.",
+   "source": "WiData, Dòng vốn"
+  },
+  {
+   "ticker": "SIP",
+   "exchange": "HOSE",
+   "price": 50.5,
+   "change": 3.06,
+   "tag": "Cổ tức",
+   "title": "Đầu tư Sài Gòn VRG sắp tạm ứng cổ tức tỷ lệ 45%",
+   "summary": "SIP dự kiến tạm ứng cổ tức tỷ lệ 45%.",
+   "source": "TNCK"
+  },
+  {
+   "ticker": "DPR",
+   "exchange": "HOSE",
+   "price": 38.15,
+   "change": 0.79,
+   "tag": "Phát hành",
+   "title": "Cao su Đồng Phú muốn nâng vốn gấp đôi bằng thưởng cổ phiếu",
+   "summary": "DPR đề xuất phát hành cổ phiếu thưởng để nâng vốn điều lệ lên gấp đôi.",
+   "source": "TNCK"
+  },
+  {
+   "ticker": "QCG",
+   "exchange": "HOSE",
+   "price": 10.6,
+   "change": 0.95,
+   "tag": "Cổ tức",
+   "title": "Quốc Cường Gia Lai trả cổ tức năm 2021 bằng cổ phiếu tỷ lệ 10%",
+   "summary": "QCG lên kế hoạch phát hành thêm hơn 27.5 triệu cổ phiếu để trả cổ tức năm 2021 bằng cổ phiếu, tỷ lệ 10%.",
+   "source": "TNCK, Người Đưa Tin"
+  },
+  {
+   "ticker": "PVS",
+   "exchange": "HNX",
+   "price": 29.7,
+   "change": -1.98,
+   "tag": "KQKD",
+   "title": "PVS: lãi 10 tháng vượt 42% kế hoạch năm",
+   "summary": "PTSC (PVS) báo lãi 10 tháng vượt 42% kế hoạch năm; doanh thu 10 tháng gần 32,000 tỷ đồng.",
+   "source": "Vietnambiz, CafeF"
+  },
+  {
+   "ticker": "PCB",
+   "exchange": "UPCOM",
+   "price": 9.1,
+   "change": 0.0,
+   "tag": "KQKD",
+   "title": "PVcomBank lãi 1,878 tỷ đồng 9 tháng, gấp 16 lần kế hoạch năm",
+   "summary": "PVcomBank báo lãi 1,878 tỷ đồng sau 9 tháng năm 2026, cao gấp 16 lần kế hoạch cả năm.",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "CTG",
+   "exchange": "HOSE",
+   "price": 31.6,
+   "change": 1.77,
+   "tag": "KQKD",
+   "title": "VietinBank: lợi nhuận trước thuế 9 tháng tăng 33.9%",
+   "summary": "VietinBank (CTG) công bố lợi nhuận trước thuế 9 tháng đầu năm 2026 tăng 33.9% so với cùng kỳ.",
+   "source": "TNCK"
+  },
+  {
+   "ticker": "SGP",
+   "exchange": "UPCOM",
+   "price": 19.0,
+   "change": 0.53,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "VietinBank đăng ký bán toàn bộ 19.31 triệu cổ phiếu Cảng Sài Gòn",
+   "summary": "Ngân hàng Công Thương VN đăng ký bán 19.31 triệu cổ phiếu SGP, giảm sở hữu từ 8.93% xuống 0%. Quý 3 LNST SGP 116.7 tỷ đồng (-30.6%).",
+   "source": "WiData"
+  }
+ ]
+}
