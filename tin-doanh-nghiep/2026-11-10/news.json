@@ -1,0 +1,147 @@
+{
+ "date": "10/11/2026",
+ "items": [
+  {
+   "ticker": "POW",
+   "exchange": "HOSE",
+   "price": 12.5,
+   "change": -0.4,
+   "tag": "KQKD",
+   "title": "PV Power nâng mục tiêu lợi nhuận năm 2026",
+   "summary": "Hợp nhất: lợi nhuận trước thuế kế hoạch 5,568 tỷ đồng, gấp gần 4.2 lần; lợi nhuận sau thuế 4,973 tỷ đồng, gấp hơn 4.4 lần kế hoạch cũ.",
+   "source": "Vietnambiz"
+  },
+  {
+   "ticker": "VNZ",
+   "exchange": "UPCOM",
+   "price": 580.0,
+   "change": 0.87,
+   "tag": "KQKD",
+   "title": "VNG: lợi nhuận quý 3/2026 tăng vọt",
+   "summary": "Quý 3 doanh thu thuần 3,361 tỷ đồng (+16.1%), LNST cổ đông mẹ 420.9 tỷ đồng. Lũy kế 9 tháng LNST đạt 1,080 tỷ đồng.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "VBB",
+   "exchange": "HOSE",
+   "price": 11.85,
+   "change": -1.25,
+   "tag": "KQKD",
+   "title": "Vietbank hạ kế hoạch lợi nhuận năm 2026",
+   "summary": "HĐQT thông qua giảm lợi nhuận trước thuế mục tiêu từ 2,100 tỷ xuống 1,700 tỷ đồng, giảm 400 tỷ đồng (khoảng 19%).",
+   "source": "Mekong ASEAN"
+  },
+  {
+   "ticker": "HSG",
+   "exchange": "HOSE",
+   "price": 10.9,
+   "change": 0.0,
+   "tag": "Phát hành",
+   "title": "Hoa Sen Group mua thêm cổ phần Hoa Sen Home",
+   "summary": "HSG dự kiến mua 198 triệu cổ phần Hoa Sen Home giá 10,000 đồng, tổng 1,980 tỷ đồng; vẫn giữ 99% vốn sau khi công ty con tăng vốn.",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "KDH",
+   "exchange": "HOSE",
+   "price": 15.9,
+   "change": 5.65,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "Khang Điền: Longwoods mua vào 1.00% vốn",
+   "summary": "Longwoods Worldwide mua 12.50 triệu cổ phiếu KDH, nâng sở hữu từ 0% lên 1.00%. Nhóm VinaCapital nâng sở hữu lên 7.2%.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "DXG",
+   "exchange": "HOSE",
+   "price": 11.4,
+   "change": 4.11,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "Bluemarq (DXG): quỹ VEIL mua thêm cổ phiếu",
+   "summary": "Vietnam Enterprise Investments mua 2.72 triệu cổ phiếu DXG, nâng sở hữu từ 4.00 triệu (0.32%) lên 6.72 triệu cổ phiếu (0.53%).",
+   "source": "WiData"
+  },
+  {
+   "ticker": "MSB",
+   "exchange": "HOSE",
+   "price": 16.35,
+   "change": 0.31,
+   "tag": "Phát hành",
+   "title": "MSB dự kiến chào bán cổ phiếu huy động 9,360 tỷ",
+   "summary": "MSB dự kiến huy động 9,360 tỷ đồng từ chào bán cổ phiếu, dành 85% nguồn vốn để cho vay.",
+   "source": "Người Quan Sát"
+  },
+  {
+   "ticker": "VHM",
+   "exchange": "HOSE",
+   "price": 62.0,
+   "change": 2.65,
+   "tag": "Dự án/Hợp đồng",
+   "title": "Vinhomes tăng vốn dự án đô thị thể thao Hà Nội",
+   "summary": "Vinhomes muốn rót thêm gần 12 tỷ USD vào Khu đô thị Thể thao Quốc tế Hà Nội, điều chỉnh vốn đầu tư dự án.",
+   "source": "Mekong ASEAN"
+  },
+  {
+   "ticker": "PNJ",
+   "exchange": "HOSE",
+   "price": 14.7,
+   "change": 3.52,
+   "tag": "Nhân sự",
+   "title": "PNJ: Giám đốc cao cấp Tài chính xin từ nhiệm",
+   "summary": "Giám đốc cao cấp – Tài chính của PNJ gửi đơn xin từ nhiệm theo thông tin công bố ngày 10/11.",
+   "source": "VnEconomy"
+  },
+  {
+   "ticker": "SSI",
+   "exchange": "HOSE",
+   "price": 20.65,
+   "change": 3.77,
+   "tag": "Pháp lý",
+   "title": "Một chi nhánh SSI bị xử phạt về thuế",
+   "summary": "Một chi nhánh của Chứng khoán SSI bị xử phạt vi phạm hành chính về thuế (Cục Thuế TP.HCM).",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "BCM",
+   "exchange": "HOSE",
+   "price": 38.35,
+   "change": 1.99,
+   "tag": "Phát hành",
+   "title": "Becamex IDC huy động 1,200 tỷ đồng trái phiếu",
+   "summary": "BCM huy động thành công 1,200 tỷ đồng trái phiếu \"3 không\" để cơ cấu nợ, lãi suất 12.5%/năm.",
+   "source": "Tinnhanhchungkhoan"
+  }
+ ],
+ "sectors": [
+  {
+   "sector": "Ngân hàng",
+   "title": "Dư nợ cho vay bất động sản tại 12 ngân hàng tăng gần 22%",
+   "summary": "Cuối tháng 9, dư nợ cho vay kinh doanh bất động sản tại 12 ngân hàng khoảng 1.15 triệu tỷ đồng, tăng gần 22% so với cuối năm 2025.",
+   "source": "VnBusiness"
+  },
+  {
+   "sector": "Thủy sản",
+   "title": "VASEP kiến nghị thuế 0% không giới hạn cho tôm Việt tại Hàn Quốc",
+   "summary": "Hiệp hội VASEP kiến nghị áp thuế 0% không giới hạn hạn ngạch đối với tôm Việt Nam xuất khẩu sang Hàn Quốc.",
+   "source": "Doanh Nhân Việt Nam"
+  },
+  {
+   "sector": "Nông sản",
+   "title": "Ấn Độ có thể tái áp dụng hạn chế xuất khẩu gạo 100% tấm",
+   "summary": "Thông tin cho biết Ấn Độ có thể tái áp dụng các biện pháp hạn chế xuất khẩu gạo 100% tấm, tác động đến thị trường gạo.",
+   "source": "Vietnambiz"
+  },
+  {
+   "sector": "Dầu khí",
+   "title": "Giá dầu WTI giảm 4.4% xuống 85.6 USD/thùng",
+   "summary": "Phiên 09/11, giá dầu WTI giảm 4.4% xuống 85.6 USD/thùng, thấp hơn 6.9% so với tháng trước, cao hơn 40.9% so với cùng kỳ năm ngoái.",
+   "source": "WiData"
+  },
+  {
+   "sector": "Bất động sản",
+   "title": "Hà Nội phê duyệt 6 quy trình điện tử về nhà ở và bất động sản",
+   "summary": "Quyết định 1284/QĐ-TTPVHCC phê duyệt 6 quy trình điện tử, gồm chuyển nhượng dự án bất động sản và bán, cho thuê mua nhà ở xã hội.",
+   "source": "VnEconomy"
+  }
+ ]
+}
