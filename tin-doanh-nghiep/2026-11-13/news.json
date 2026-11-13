@@ -1,0 +1,147 @@
+{
+ "date": "13/11/2026",
+ "items": [
+  {
+   "ticker": "MBB",
+   "exchange": "HOSE",
+   "price": 19.15,
+   "change": -0.26,
+   "tag": "Phát hành",
+   "title": "MB chào bán riêng lẻ 200 triệu cổ phiếu",
+   "summary": "MB dự kiến chào bán 200 triệu cổ phiếu cho 6 tổ chức, giá 15,090 đồng/cp, thu 3,018 tỷ đồng; hạn chế chuyển nhượng 5 năm.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "FOX",
+   "exchange": "UPCOM",
+   "price": 54.8,
+   "change": 1.29,
+   "tag": "Cổ tức",
+   "title": "FPT Telecom trả cổ tức tiền 20% và thưởng cổ phiếu 15%",
+   "summary": "Chốt quyền 10/12/2026: cổ tức tiền 2,000 đồng/cp, chi khoảng 1,478 tỷ đồng; thưởng 15%, phát hành gần 111 triệu cổ phiếu.",
+   "source": "CafeF"
+  },
+  {
+   "ticker": "KDH",
+   "exchange": "HOSE",
+   "price": 15.7,
+   "change": 0.96,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "Nhà Khang Điền: Dragon Capital không còn là cổ đông lớn",
+   "summary": "Nhóm Dragon Capital bán 710,000 cổ phiếu KDH, giảm sở hữu từ 5.05% xuống 4.99% vốn điều lệ.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "DIG",
+   "exchange": "HOSE",
+   "price": 10.2,
+   "change": -2.39,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "DIC Corp: vợ Tổng giám đốc mua 1 triệu cổ phiếu",
+   "summary": "Bà Vũ Thị Thu Hương mua 1 triệu cổ phiếu DIG từ 15/10 đến 12/11, nâng sở hữu từ 0.02% lên 0.14% vốn điều lệ.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "SHB",
+   "exchange": "HOSE",
+   "price": 10.9,
+   "change": -0.91,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "SHB: hai Phó Tổng giám đốc mua 4 triệu cổ phiếu",
+   "summary": "Hai Phó TGĐ Đinh Ngọc Dũng và Nguyễn Huy Tài mỗi người mua 2 triệu cổ phiếu SHB. LNTT 9 tháng đạt 14,309 tỷ đồng, tăng 17%.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "PNJ",
+   "exchange": "HOSE",
+   "price": 14.95,
+   "change": 0.0,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "PNJ: người liên quan bị bán giải chấp 2.8 triệu cổ phiếu",
+   "summary": "MBS thông báo bán giải chấp 2,815,000 cổ phiếu PNJ của bà Trần Phương Ngọc Giao, lần thứ 4 từ đầu tháng 10.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "MVN",
+   "exchange": "UPCOM",
+   "price": 59.0,
+   "change": -1.99,
+   "tag": "Cổ tức",
+   "title": "VIMC được Chính phủ cho chia cổ tức bằng cổ phiếu",
+   "summary": "Nghị quyết 46/2026/NQ-CP cho chia cổ tức bằng cổ phiếu từ lợi nhuận sau thuế 2024 chưa phân phối, hiệu lực từ 25/12/2026.",
+   "source": "CafeF"
+  },
+  {
+   "ticker": "TCX",
+   "exchange": "HOSE",
+   "price": 28.35,
+   "change": -0.53,
+   "tag": "Nhân sự",
+   "title": "TCBS: một thành viên HĐQT xin từ nhiệm",
+   "summary": "Ông Alexandre Charles Emmanuel Macaire, thành viên HĐQT nhiệm kỳ 2023-2028, nộp đơn từ nhiệm để thực hiện nhiệm vụ khác của hệ sinh thái.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "EIB",
+   "exchange": "HOSE",
+   "price": 16.2,
+   "change": 0.0,
+   "tag": "Cổ đông/Nội bộ",
+   "title": "Eximbank: cổ đông Nhà nước đăng ký bán toàn bộ cổ phần",
+   "summary": "Công ty Đầu tư Tài chính Nhà nước TP.HCM đăng ký bán toàn bộ hơn 8 triệu cổ phiếu EIB, tương đương 0.45% vốn điều lệ.",
+   "source": "WiData"
+  },
+  {
+   "ticker": "GDA",
+   "exchange": "HOSE",
+   "price": 13.25,
+   "change": 6.85,
+   "tag": "KQKD",
+   "title": "Tôn Đông Á: LNST quý 3 giảm 11.5% dù doanh thu tăng",
+   "summary": "Quý 3/2026 doanh thu thuần 4,501 tỷ đồng (+22.3%), LNST công ty mẹ 75.3 tỷ đồng (-11.5%). Lũy kế 9 tháng LNST 220.1 tỷ đồng (-6.5%).",
+   "source": "WiData"
+  },
+  {
+   "ticker": "BID",
+   "exchange": "HOSE",
+   "price": 31.85,
+   "change": -0.78,
+   "tag": "Phát hành",
+   "title": "BIDV huy động thành công 2,000 tỷ đồng trái phiếu",
+   "summary": "BIDV huy động thành công 2,000 tỷ đồng từ kênh phát hành trái phiếu.",
+   "source": "Người Đưa Tin"
+  }
+ ],
+ "sectors": [
+  {
+   "sector": "Điện",
+   "title": "Chính phủ ban hành cơ chế tài chính đặc thù cho EVN",
+   "summary": "Nghị định 407/2026/NĐ-CP ngày 12/11/2026 có hiệu lực từ 28/12/2026; cho phép chuyển giao tài sản điện lực giữa EVN và công ty con 100% vốn theo giá trị sổ sách.",
+   "source": "PetroTimes"
+  },
+  {
+   "sector": "Ngân hàng",
+   "title": "NHNN yêu cầu thanh tra việc giảm lãi suất trong tháng 11",
+   "summary": "Ngân hàng Nhà nước yêu cầu các chi nhánh khẩn trương thanh tra việc thực hiện giảm lãi suất tại các ngân hàng ngay trong tháng 11.",
+   "source": "Người Quan Sát"
+  },
+  {
+   "sector": "Thủy sản",
+   "title": "Xuất khẩu cá ngừ sang Mỹ vượt 280 triệu USD sau 9 tháng",
+   "summary": "Xuất khẩu cá ngừ sang Mỹ hơn 280 triệu USD, tăng 9%, chiếm gần 39% kim ngạch. Cả nước đạt gần 720 triệu USD, tăng 6%.",
+   "source": "VASEP"
+  },
+  {
+   "sector": "Thép",
+   "title": "Giá thép mạ kẽm Trung Quốc xuống đáy 10 năm",
+   "summary": "Giá tấm thép mạ kẽm nhúng nóng giao ngay còn 4,030 CNY/tấn (12/11), giảm 0.2% so với phiên trước và giảm 3.9% so với cùng kỳ.",
+   "source": "WiData"
+  },
+  {
+   "sector": "Vàng",
+   "title": "Giá vàng SJC xuống đáy một năm, 138 triệu đồng/lượng",
+   "summary": "Giá vàng SJC bán ra 138 triệu đồng/lượng ngày 13/11, giảm 0.7% so với phiên trước, giảm 4.4% trong một tháng và 7.4% so với cùng kỳ.",
+   "source": "WiData"
+  }
+ ]
+}
