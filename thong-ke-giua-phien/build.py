@@ -89,6 +89,38 @@ def vn30f_code(today=None):
     return f"41I1{chr(ord('G') + y - 2026)}{'123456789ABC'[m - 1]}000", f"VN30F {m:02d}/{y}"
 
 
+def place_labels(line, specs, blocked, lim):
+    """Chọn vị trí nhãn: không chồng nhãn khác/điểm đánh dấu, ít đè lên đường giá nhất.
+    line: các điểm (x,y) của đường giá và đường tham chiếu; specs: [(chữ, [(x,y,anchor),...])]."""
+    pts = []
+    for seg in line:
+        for (x0, y0), (x1, y1) in zip(seg, seg[1:]):
+            n = max(1, int(max(abs(x1 - x0), abs(y1 - y0)) // 5))
+            pts += [(x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n) for k in range(n + 1)]
+    taken, out = list(blocked), []
+    for text, cands in specs:
+        wpx = len(text) * 14.5  # Inter 700 24px
+        best = None
+        for x, y, a in cands:
+            x0 = x - wpx if a == "end" else x - wpx / 2 if a == "middle" else x
+            bx = (x0 - 6, y - 24, x0 + wpx + 6, y + 8)
+            if bx[0] < lim[0] or bx[1] < lim[1] or bx[2] > lim[2] or bx[3] > lim[3]:
+                continue
+            if any(bx[0] < o[2] and o[0] < bx[2] and bx[1] < o[3] and o[1] < bx[3] for o in taken):
+                continue
+            hit = sum(bx[0] <= px <= bx[2] and bx[1] <= py <= bx[3] for px, py in pts)
+            if best is None or hit < best[0]:
+                best = (hit, x, y, a, bx)
+            if hit == 0:
+                break
+        if best is None:
+            x, y, a = cands[0]
+            best = (0, x, y, a, (x, y - 24, x + wpx, y + 8))
+        taken.append(best[4])
+        out.append(best[1:4])
+    return out
+
+
 def price_chart(data):
     pts = [(int(t[:2]) * 60 + int(t[3:5]), v) for t, v in data["series"]]
     ix = data["index"]
@@ -123,15 +155,24 @@ def price_chart(data):
             grid += f'<text x="{xr+14}" y="{Y(v)+8:.1f}" class="ax">{vn(v)}</text>'
     xa = X(690) + 16
     # Nhãn tự tránh nhau: đổi phía khi sát đường tham chiếu hoặc mép khung
-    ny = (t + h - b) / 2 + 8
-    if abs(ny - 8 - yr) < 40:
-        ny -= 56
-    ry = yr - 12 if yr - 40 > t else yr + 32
+    # dòng "Phiên chiều" chọn chỗ xa đường tham chiếu và đường chấm giá hiện tại nhất
+    ny = max((t + 34 + k * (h - b - t - 50) / 8 for k in range(9)),
+             key=lambda y: min(abs(y - 8 - yr), abs(y - 8 - ye)) - abs(y - (t + h - b) / 2) * .05)
     lx, ly = X(lowp[0]), Y(lowp[1])
-    dy = ly + 38
-    if abs(dy - 8 - yr) < 26 or dy > h - b - 4:
-        dy = ly - 20
-    da, dx = ("end", lx + 10) if lx > X(690) - 300 else ("start", lx - 8)
+    poly = [(X(m), Y(v)) for m, v in pts]
+    lim = (l, 0, xr, h - b + 6)
+    blocked = [(xe - 14, ye - 14, xe + 14, ye + 14), (lx - 12, ly - 12, lx + 12, ly + 12), ((xa + xr) / 2 - 190, ny - 26, (xa + xr) / 2 + 190, ny + 8)]
+    low_t = f"Đáy {vn(ix['low'],2)}"
+    ref_t = f"Tham chiếu {vn(ref,2)}"
+    (dx, dy, da), (rx, ry, ra) = place_labels(
+        [poly, [(l, yr), (xr, yr)]],
+        [(low_t, [(lx, ly + 38, "middle"), (lx, ly - 20, "middle"), (lx + 18, ly + 8, "start"),
+                  (lx - 18, ly + 8, "end"), (lx + 10, ly + 38, "end"), (lx - 8, ly + 38, "start"),
+                  (lx + 10, ly - 20, "end"), (lx - 8, ly - 20, "start")]),
+         (ref_t, [(xr - 14, yr - 12, "end"), (xr - 14, yr + 32, "end"), (l + 12, yr - 12, "start"),
+                  (l + 12, yr + 32, "start"), ((l + xr) / 2, yr - 12, "middle"), ((l + xr) / 2, yr + 32, "middle"),
+                  (X(600), yr - 12, "middle"), (X(600), yr + 32, "middle")])],
+        blocked, lim)
     return f'''<svg viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="VN-Index theo nến 5 phút">
 <defs><clipPath id="ab"><rect x="0" y="0" width="{w}" height="{yr:.1f}"/></clipPath>
 <clipPath id="be"><rect x="0" y="{yr:.1f}" width="{w}" height="{h}"/></clipPath></defs>
@@ -143,11 +184,11 @@ def price_chart(data):
 <line x1="{xe:.1f}" x2="{xr+10}" y1="{ye:.1f}" y2="{ye:.1f}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
 <path d="{path}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
 <circle cx="{lx:.1f}" cy="{ly:.1f}" r="7" fill="var(--down)" stroke="#fff" stroke-width="2"/>
-<text x="{dx:.1f}" y="{dy:.1f}" text-anchor="{da}" class="lab" fill="var(--down)">Đáy {vn(ix['low'],2)}</text>
+<text x="{dx:.1f}" y="{dy:.1f}" text-anchor="{da}" class="lab" fill="var(--down)">{low_t}</text>
 <circle cx="{xe:.1f}" cy="{ye:.1f}" r="8" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
 <rect x="{xr+10}" y="{ye-23:.1f}" width="{r-12}" height="46" rx="8" fill="var(--ink)"/>
 <text x="{xr+10+(r-12)/2:.1f}" y="{ye+8:.1f}" text-anchor="middle" class="lab" fill="#fff">{vn(pts[-1][1],2)}</text>
-<text x="{xr-14}" y="{ry:.1f}" text-anchor="end" class="lab" fill="var(--gold-strong)">Tham chiếu {vn(ref,2)}</text>
+<text x="{rx:.1f}" y="{ry:.1f}" text-anchor="{ra}" class="lab" fill="var(--gold-strong)">{ref_t}</text>
 {ticks}</svg>'''
 
 
