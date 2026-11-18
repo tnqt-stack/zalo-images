@@ -267,9 +267,9 @@ def render(day):
     dow = ["Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy", "Chủ Nhật"][d.weekday()]
     dstr = d.strftime("%d/%m/%Y")
     cur, prev = liq["curr"][-1], liq["prev"][-1]
-    avg3 = (liq["week1"][-1] + liq["week2"][-1] + liq["month"][-1]) / 3
+    avg3 = liq["month"][-1]  # VCBS monthVal: TB các phiên trong 1 tháng gần nhất (~20 phiên), cùng giờ
     tot = liq["total"]
-    tavg3 = (tot["week1"] + tot["week2"] + tot["month"]) / 3
+    tavg3 = tot["month"]
     atc = liq["curr"][-1] - liq["curr"][51]
     vals = [pct(q, s) for g in uni.values() for s in g]
     up, dn = sum(v > 0 for v in vals), sum(v < 0 for v in vals)
@@ -305,9 +305,9 @@ def render(day):
     def word(x):
         return "cao hơn" if x > 0 else "thấp hơn"
 
-    liq_title = f'Thanh khoản {word(vs_p)} hôm qua {vn(abs(vs_p),1)}%, {word(vs_a)} TB 3 phiên {vn(abs(vs_a),1)}%'
+    liq_title = f'Thanh khoản {word(vs_p)} hôm qua {vn(abs(vs_p),1)}%, {word(vs_a)} TB 1 tháng {vn(abs(vs_a),1)}%'
     if vs_p > 0 and vs_a < 0:
-        liq_read = "Dòng tiền cả phiên cải thiện so với hôm qua nhưng vẫn dưới mức thường thấy của 3 phiên đối chiếu."
+        liq_read = "Dòng tiền cả phiên cải thiện so với hôm qua nhưng vẫn dưới mức trung bình 1 tháng."
     elif vs_p > 0:
         liq_read = "Dòng tiền cả phiên cao hơn cả hôm qua lẫn mức thường thấy."
     elif vs_a > 0:
@@ -342,8 +342,8 @@ def render(day):
 <h2 class="sh"><em>01</em>Diễn biến trong phiên</h2><p class="sub">VN-Index theo nến 5 phút, gộp giờ nghỉ trưa · nét đứt vàng: tham chiếu</p>
 <div class="card">{price_chart(data)}</div>
 <h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · lũy kế cả phiên đến 15:00 · điểm đóng góp theo VCBS</p>
-<section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}</div><div class="lr"><div class="ct2">Gồm thỏa thuận, tỷ đồng**</div>{cmp_rows([("Hôm nay", tot["curr"], None), ("Hôm qua", tot["prev"], (tot["curr"]/tot["prev"]-1)*100), ("TB 3 phiên*", tavg3, (tot["curr"]/tavg3-1)*100)])}</div></div>
-<div class="how-to-read"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Khớp lệnh cộng thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
+<section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 1 tuần*", liq["week1"][-1], (cur/liq["week1"][-1]-1)*100), ("TB 2 tuần*", liq["week2"][-1], (cur/liq["week2"][-1]-1)*100), ("TB 1 tháng*", avg3, vs_a)])}</div><div class="lr"><div class="ct2">Gồm thỏa thuận, tỷ đồng**</div>{cmp_rows([("Hôm nay", tot["curr"], None), ("Hôm qua", tot["prev"], (tot["curr"]/tot["prev"]-1)*100), ("TB 1 tuần*", tot["week1"], (tot["curr"]/tot["week1"]-1)*100), ("TB 2 tuần*", tot["week2"], (tot["curr"]/tot["week2"]-1)*100), ("TB 1 tháng*", tavg3, (tot["curr"]/tavg3-1)*100)])}</div></div>
+<div class="how-to-read"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* Trung bình các phiên trong 1 tuần, 2 tuần, 1 tháng gần nhất (1 tháng ≈ 20 phiên), không gồm hôm nay. ** Khớp lệnh cộng thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
 <div class="card"><div class="ct">Kéo / đè chỉ số, điểm: {lift} nâng nhiều nhất, {drag} đè mạnh nhất</div>{contrib_chart(ct)}
 <p class="ln rest">Các mã còn lại cộng dồn: <b>{vn(rest,2,True)} điểm</b></p>
 <p class="ln">{dv["name"]}: <b class="chg {cls(dvc)}">{vn(dv["price"],1)} ({vn(dvc,2,True)}%)</b> · basis {vn(basis,1,True)}</p></div></section>
@@ -359,7 +359,7 @@ def render(day):
 </main></body></html>'''
     out = ROOT / day / "index.html"
     out.write_text(html, "utf8")
-    print(f"GTGD gồm TT {tot['curr']} | ATC {atc} | độ rộng {up}/{fl}/{dn} | còn lại {rest:.2f} | TB3 {avg3:.0f}")
+    print(f"GTGD gồm TT {tot['curr']} | ATC {atc} | độ rộng {up}/{fl}/{dn} | còn lại {rest:.2f} | TB1T {avg3:.0f}")
     return out
 
 
