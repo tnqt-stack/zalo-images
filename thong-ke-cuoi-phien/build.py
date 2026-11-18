@@ -14,7 +14,7 @@ SCALE = 1.75
 
 
 def vn(x, d=0, sign=False):
-    s = f"{abs(x):,.{d}f}".replace(",", "#").replace(".", ",").replace("#", ".")
+    s = f"{abs(x):,.{d}f}"  # WeHa: 12,345.6
     pre = ("+" if x > 0 else "−" if x < 0 else "") if sign else ("−" if x < 0 else "")
     return pre + s
 
@@ -217,48 +217,29 @@ def squarify(items, x, y, w, h):
     return out
 
 
-def heat_col(p):
-    if p >= 2.5:
-        return "h3u"
-    if p >= 1:
-        return "h2u"
-    if p >= .1:
-        return "h1u"
-    if p > -.1:
-        return "h0"
-    if p > -1:
-        return "h1d"
-    if p > -2.5:
-        return "h2d"
-    return "h3d"
+def heat_style(p):
+    """Màu ô bản đồ nhiệt: đậm dần theo |%|, chạm màu đậm nhất ở 4%."""
+    if round(p, 2) == 0:
+        return "background:var(--hm-flat)"
+    t = min(abs(p) / 4, 1)
+    side = "up" if p > 0 else "down"
+    fg = "#fff" if t >= .55 else "var(--text)"
+    return f"background:color-mix(in srgb,var(--{side}-bar) {t*100:.0f}%,var(--{side}-bg));color:{fg}"
 
 
 def heatmap(uni, q):
-    W_, H_, strip = 2288, 660, 34
-    tot = sum(sum(g.values()) for g in uni.values())
-    gs = sorted(uni.items(), key=lambda kv: -sum(kv[1].values()))
-    k = W_ * H_ / tot
-    html = ""
-    for name, x, y, w, h in squarify([(n, sum(g.values()) * k) for n, g in gs], 0, 0, W_, H_):
-        g = uni[name]
-        ih = h - strip
-        sc = w * ih / sum(g.values())
-        html += (f'<div class="hg" style="left:{x:.1f}px;top:{y:.1f}px;width:{w:.1f}px;height:{h:.1f}px">'
-                 f'<b class="hl">{name}</b>')
-        cells = sorted(((s, v * sc) for s, v in g.items()), key=lambda a: -a[1])
-        for s, tx, ty, tw, th in squarify(cells, 0, strip, w, ih):
-            p = pct(q, s)
-            fs = min(80, tw / 3.3, th / 2.5)
-            show = fs >= 17
-            if fs < 17:
-                fs = min(19, tw / 2.15, th / 1.25)
-            row = not show and tw >= fs * 5.2
-            rowc = " row" if row else ""
-            sub = f'<small style="font-size:{max(15,fs*.6):.0f}px">{vn(p,2,True)}%</small>' if show or row else ""
-            html += (f'<div class="ht {heat_col(p)}{rowc}" style="left:{tx:.1f}px;top:{ty:.1f}px;width:{tw:.1f}px;height:{th:.1f}px">'
-                     f'<span style="font-size:{fs:.0f}px">{s}</span>{sub}</div>')
-        html += "</div>"
-    return f'<div class="heat" style="width:{W_}px;height:{H_}px">{html}</div>'
+    """Lưới 10 cột, 60 mã xếp theo vốn hóa giảm dần, % hai chữ số thập phân."""
+    caps = sorted(((s, v) for g in uni.values() for s, v in g.items()), key=lambda a: -a[1])
+    cells = "".join(f'<div class="hc" style="{heat_style(pct(q, s))}"><b>{s}</b><span>{vn(pct(q, s),2,True)}%</span></div>'
+                    for s, _ in caps)
+    ex = "VHM" if "VHM" in q else caps[1][0]
+    leg = ('<div class="hm-leg"><span><i style="background:var(--down-bar)"></i>Giảm mạnh</span>'
+           '<span><i style="background:var(--hm-flat)"></i>Đứng giá</span>'
+           '<span><i style="background:var(--up-bar)"></i>Tăng mạnh</span>'
+           '<em>60 mã vốn hóa lớn HOSE</em></div>'
+           f'<p class="hm-note">Số trong ô là % thay đổi so với giá tham chiếu, làm tròn 2 chữ số thập phân, '
+           f'ví dụ {ex} {vn(pct(q, ex),2,True)}%. Màu đậm dần theo mức tăng/giảm, đậm nhất từ ±4%.</p>')
+    return f'<div class="hm">{cells}</div>{leg}'
 
 
 def contrib_chart(ct):
@@ -346,7 +327,7 @@ def render(day):
     lead = "Bên tăng áp đảo" if up > dn * 1.3 else "Bên giảm áp đảo" if dn > up * 1.3 else "Cân bằng"
     netlist = ", ".join(s for s, _ in (fr["sell"] if net < 0 else fr["buy"])[:3])
     html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê cuối phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
-<header class="top"><img src="../assets/logo.png" alt="WeHa"><div class="meta"><b>Cuối phiên · {data["time"]}</b><span>{dow}, {dstr}</span></div></header>
+<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Cuối phiên · {data["time"]} · {dow}, {dstr}</span></div><img src="../assets/logo.png" alt="WeHa"></header>
 <div class="band">Thống kê cuối phiên</div>
 <div class="kick">Đóng cửa · {dow} {dstr}</div>
 <h1 class="h1">{h1}</h1>
@@ -360,23 +341,19 @@ def render(day):
 </section>
 <h2 class="sh"><em>01</em>Diễn biến trong phiên</h2><p class="sub">VN-Index theo nến 5 phút, gộp giờ nghỉ trưa · nét đứt vàng: tham chiếu</p>
 <div class="card">{price_chart(data)}</div>
-<h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · lũy kế cả phiên đến 15:00</p>
-<div class="card liq"><div class="lc"><div class="lg"><span><i style="background:var(--ink)"></i>Hôm nay</span><span><i style="background:var(--gold)"></i>Hôm qua</span><span><i class="dash"></i>TB 3 phiên*</span></div>
-<div class="cap">Giá trị khớp lệnh lũy kế, tỷ đồng</div>{liq_chart(liq)}</div>
-<div class="lrs"><div class="lr"><div class="ct">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}
-</div><div class="lr"><div class="ct">Gồm thỏa thuận, tỷ đồng**</div>{cmp_rows([("Hôm nay", tot["curr"], None), ("Hôm qua", tot["prev"], (tot["curr"]/tot["prev"]-1)*100), ("TB 3 phiên*", tavg3, (tot["curr"]/tavg3-1)*100)])}</div></div>
-<div class="how-to-read wide"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Khớp lệnh cộng thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
-<h2 class="sh"><em>03</em>{upn} trong 60 mã vốn hóa lớn tăng, {dnn} mã giảm</h2><p class="sub">60 mã lớn nhất HOSE · diện tích theo vốn hóa, màu theo % thay đổi</p>
-<div class="card">{heatmap(uni, q)}<div class="scale"><span>−4%</span><i class="h3d"></i><i class="h2d"></i><i class="h1d"></i><i class="h0"></i><i class="h1u"></i><i class="h2u"></i><i class="h3u"></i><span>+4%</span></div></div>
-<h2 class="sh"><em>04</em>{lift} nâng chỉ số nhiều nhất, {drag} đè mạnh nhất</h2><p class="sub">Độ rộng tính trên 60 mã vốn hóa lớn HOSE · điểm đóng góp theo VCBS</p>
-<section class="two"><div class="card"><div class="ct">Độ rộng 60 mã lớn: {lead.lower()}</div>
-<div class="stack"><i style="flex:{up};background:var(--up-bar)"></i><i style="flex:{fl};background:var(--gold)"></i><i style="flex:{dn};background:var(--down-bar)"></i></div>
-<div class="sl"><span class="chg up">▲ {up} tăng</span><span class="nt">{fl} đứng</span><span class="chg down">{dn} giảm ▼</span></div>
-<p class="ln"><b>Tăng mạnh:</b> {best}</p><p class="ln"><b>Chịu áp lực:</b> {worst}</p>
-{br_line}<p class="ln"><b>Khối ngoại:</b> bán {fsell} · mua {fbuy} (tỷ đồng)</p></div>
-<div class="card"><div class="ct">Kéo / đè chỉ số, điểm</div>{contrib_chart(ct)}
+<h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · lũy kế cả phiên đến 15:00 · điểm đóng góp theo VCBS</p>
+<section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 3 phiên*", avg3, vs_a)])}</div><div class="lr"><div class="ct2">Gồm thỏa thuận, tỷ đồng**</div>{cmp_rows([("Hôm nay", tot["curr"], None), ("Hôm qua", tot["prev"], (tot["curr"]/tot["prev"]-1)*100), ("TB 3 phiên*", tavg3, (tot["curr"]/tavg3-1)*100)])}</div></div>
+<div class="how-to-read"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* 3 phiên cách đây 1 tuần, 2 tuần, 1 tháng. ** Khớp lệnh cộng thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
+<div class="card"><div class="ct">Kéo / đè chỉ số, điểm: {lift} nâng nhiều nhất, {drag} đè mạnh nhất</div>{contrib_chart(ct)}
 <p class="ln rest">Các mã còn lại cộng dồn: <b>{vn(rest,2,True)} điểm</b></p>
 <p class="ln">{dv["name"]}: <b class="chg {cls(dvc)}">{vn(dv["price"],1)} ({vn(dvc,2,True)}%)</b> · basis {vn(basis,1,True)}</p></div></section>
+<h2 class="sh"><em>03</em>{upn} trong 60 mã vốn hóa lớn tăng, {dnn} mã giảm</h2><p class="sub">Bản đồ nhiệt 60 mã lớn nhất HOSE · xếp theo vốn hóa, màu theo % thay đổi</p>
+<div class="card">{heatmap(uni, q)}</div>
+<h2 class="sh"><em>04</em>Độ rộng 60 mã lớn: {lead.lower()}</h2><p class="sub">Đếm số mã tăng, đứng, giảm trong 60 mã vốn hóa lớn HOSE · khối ngoại tính theo tỷ đồng</p>
+<div class="card wide-card"><div class="stack"><i style="flex:{up};background:var(--up-bar)"></i><i style="flex:{fl};background:var(--gold)"></i><i style="flex:{dn};background:var(--down-bar)"></i></div>
+<div class="sl"><span class="chg up">▲ {up} tăng</span><span class="nt">{fl} đứng</span><span class="chg down">{dn} giảm ▼</span></div>
+<div class="lns"><p class="ln"><b>Tăng mạnh:</b> {best}</p><p class="ln"><b>Chịu áp lực:</b> {worst}</p>
+{br_line}<p class="ln"><b>Khối ngoại:</b> bán {fsell} · mua {fbuy} (tỷ đồng)</p></div></div>
 <footer class="foot"><div><b>WeHa - Wealth and Happiness</b> · weha.com.vn<br>Kỷ luật đầu tư bằng dữ liệu</div>
 <div class="r">Nguồn: {data.get("source", "VCBS")} · cập nhật {data["asof"]} {dstr}. Khối ngoại và thỏa thuận có thể được nguồn cập nhật thêm sau giờ giao dịch. Chỉ để tham khảo, không phải khuyến nghị đầu tư.</div></footer>
 </main></body></html>'''
@@ -398,7 +375,7 @@ async def shot(html, png):
         await p.wait_for_timeout(300)
         bad = await p.evaluate("[...document.fonts].filter(f=>f.status!='loaded').map(f=>f.family)")
         h = await p.evaluate("document.documentElement.scrollHeight")
-        over = await p.evaluate("[...document.querySelectorAll('.ct,.ln,.h1,.sh,.stat-sub,.sub,.lede')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
+        over = await p.evaluate("[...document.querySelectorAll('.ct,.ct2,.ln,.h1,.sh,.stat-sub,.sub,.lede')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
         await p.screenshot(path=str(png), full_page=True)
         await b.close()
     print(f"OK {png.name}: {int(W*SCALE)}x{int(h*SCALE)}px, cao/rộng {h/W:.2f}", "| FONT LOI:" if bad else "", bad or "", "| TRAN:" if over else "", over or "")
