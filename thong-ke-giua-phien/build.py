@@ -99,11 +99,11 @@ def place_labels(line, specs, blocked, lim):
             pts += [(x0 + (x1 - x0) * k / n, y0 + (y1 - y0) * k / n) for k in range(n + 1)]
     taken, out = list(blocked), []
     for text, cands in specs:
-        wpx = len(text) * 14.5  # Inter 700 24px
+        wpx = len(text) * 16.9  # Inter 700 28px
         best = None
         for x, y, a in cands:
             x0 = x - wpx if a == "end" else x - wpx / 2 if a == "middle" else x
-            bx = (x0 - 6, y - 24, x0 + wpx + 6, y + 8)
+            bx = (x0 - 6, y - 28, x0 + wpx + 6, y + 9)
             if bx[0] < lim[0] or bx[1] < lim[1] or bx[2] > lim[2] or bx[3] > lim[3]:
                 continue
             if any(bx[0] < o[2] and o[0] < bx[2] and bx[1] < o[3] and o[1] < bx[3] for o in taken):
@@ -115,7 +115,7 @@ def place_labels(line, specs, blocked, lim):
                 break
         if best is None:
             x, y, a = cands[0]
-            best = (0, x, y, a, (x, y - 24, x + wpx, y + 8))
+            best = (0, x, y, a, (x, y - 28, x + wpx, y + 9))
         taken.append(best[4])
         out.append(best[1:4])
     return out
@@ -125,11 +125,12 @@ def price_chart(data):
     pts = [(int(t[:2]) * 60 + int(t[3:5]), v) for t, v in data["series"]]
     ix = data["index"]
     ref = ix["ref"]
-    w, h, l, r, t, b = 2288, 340, 16, 150, 14, 42
+    w, h, l, r, t, b = 2288, 340, 16, 170, 14, 46
 
-    def X(m):  # trục gộp nghỉ trưa: 09:15 -> 14:45
-        m2 = m if m <= 690 else m - 90
-        return l + (m2 - 555) / 240 * (w - l - r)
+    xm = w - r - 270  # phiên chiều chưa diễn ra: chỉ chừa dải hẹp 270px bên phải
+
+    def X(m):  # phiên sáng 09:15 -> 11:30 chiếm gần hết bề ngang
+        return l + (min(max(m, 555), 690) - 555) / 135 * (xm - l)
 
     lo = min(ix["low"], ref) - 7
     hi = max(ix["high"], ref) + 3
@@ -151,43 +152,43 @@ def price_chart(data):
     grid = ""
     for v in range(int(lo // step + 1) * step, int(hi) + 1, step):
         grid += f'<line x1="{l}" x2="{xr}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="var(--border)"/>'
-        if abs(Y(v) - ye) > 34:  # nhãn trục không chui dưới ô giá chốt
-            grid += f'<text x="{xr+14}" y="{Y(v)+8:.1f}" class="ax">{vn(v)}</text>'
-    xa = X(690) + 16
-    # Nhãn tự tránh nhau: đổi phía khi sát đường tham chiếu hoặc mép khung
-    # dòng "Phiên chiều" chọn chỗ xa đường tham chiếu và đường chấm giá hiện tại nhất
-    ny = max((t + 34 + k * (h - b - t - 50) / 8 for k in range(9)),
-             key=lambda y: min(abs(y - 8 - yr), abs(y - 8 - ye)) - abs(y - (t + h - b) / 2) * .05)
+        if abs(Y(v) - ye) > 38:  # nhãn trục không chui dưới ô giá chốt
+            grid += f'<text x="{xr+16}" y="{Y(v)+9:.1f}" class="ax">{vn(v)}</text>'
+    xa = xm + 14
+    # Chữ "Phiên chiều" (2 dòng) đặt chỗ xa đường tham chiếu và đường chấm giá hiện tại nhất
+    cy = max((t + 40 + k * (h - b - t - 80) / 10 for k in range(11)),
+             key=lambda y: min(abs(y - yr), abs(y - ye)) - abs(y - (t + h - b) / 2) * .05)
     lx, ly = X(lowp[0]), Y(lowp[1])
     poly = [(X(m), Y(v)) for m, v in pts]
     lim = (l, 0, xr, h - b + 6)
-    blocked = [(xe - 14, ye - 14, xe + 14, ye + 14), (lx - 12, ly - 12, lx + 12, ly + 12), ((xa + xr) / 2 - 190, ny - 26, (xa + xr) / 2 + 190, ny + 8)]
+    blocked = [(xe - 14, ye - 14, xe + 14, ye + 14), (lx - 12, ly - 12, lx + 12, ly + 12), (xa, cy - 36, xr, cy + 36)]
     low_t = f"Đáy {vn(ix['low'],2)}"
     ref_t = f"Tham chiếu {vn(ref,2)}"
     (dx, dy, da), (rx, ry, ra) = place_labels(
         [poly, [(l, yr), (xr, yr)]],
-        [(low_t, [(lx, ly + 38, "middle"), (lx, ly - 20, "middle"), (lx + 18, ly + 8, "start"),
-                  (lx - 18, ly + 8, "end"), (lx + 10, ly + 38, "end"), (lx - 8, ly + 38, "start"),
+        [(low_t, [(lx, ly + 42, "middle"), (lx, ly - 20, "middle"), (lx + 18, ly + 8, "start"),
+                  (lx - 18, ly + 8, "end"), (lx + 10, ly + 42, "end"), (lx - 8, ly + 42, "start"),
                   (lx + 10, ly - 20, "end"), (lx - 8, ly - 20, "start")]),
-         (ref_t, [(xr - 14, yr - 12, "end"), (xr - 14, yr + 32, "end"), (l + 12, yr - 12, "start"),
-                  (l + 12, yr + 32, "start"), ((l + xr) / 2, yr - 12, "middle"), ((l + xr) / 2, yr + 32, "middle"),
-                  (X(600), yr - 12, "middle"), (X(600), yr + 32, "middle")])],
+         (ref_t, [(xr - 14, yr - 12, "end"), (xr - 14, yr + 36, "end"), (l + 12, yr - 12, "start"),
+                  (l + 12, yr + 36, "start"), ((l + xr) / 2, yr - 12, "middle"), ((l + xr) / 2, yr + 36, "middle"),
+                  (xm - 14, yr - 12, "end"), (xm - 14, yr + 36, "end")])],
         blocked, lim)
     return f'''<svg viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="VN-Index theo nến 5 phút">
 <defs><clipPath id="ab"><rect x="0" y="0" width="{w}" height="{yr:.1f}"/></clipPath>
 <clipPath id="be"><rect x="0" y="{yr:.1f}" width="{w}" height="{h}"/></clipPath></defs>
 <rect x="{xa:.1f}" y="{t}" width="{xr-xa:.1f}" height="{h-t-b}" rx="8" fill="var(--surface-soft)"/>
-{grid}<text x="{(xa+xr)/2:.1f}" y="{ny:.1f}" text-anchor="middle" class="note">Phiên chiều 13:00 – 14:45</text>
+{grid}<text x="{(xa+xr)/2:.1f}" y="{cy-6:.1f}" text-anchor="middle" class="note">Phiên chiều</text>
+<text x="{(xa+xr)/2:.1f}" y="{cy+26:.1f}" text-anchor="middle" class="note">13:00 – 14:45</text>
 <path d="{area}" fill="var(--zone-up-fill)" clip-path="url(#ab)"/>
 <path d="{area}" fill="var(--zone-down-fill)" clip-path="url(#be)"/>
 <line x1="{l}" x2="{xr}" y1="{yr:.1f}" y2="{yr:.1f}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 6"/>
-<line x1="{xe:.1f}" x2="{xr+10}" y1="{ye:.1f}" y2="{ye:.1f}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
+<line x1="{xe:.1f}" x2="{xr+8}" y1="{ye:.1f}" y2="{ye:.1f}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
 <path d="{path}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
 <circle cx="{lx:.1f}" cy="{ly:.1f}" r="7" fill="var(--down)" stroke="var(--dot-ring)" stroke-width="2"/>
 <text x="{dx:.1f}" y="{dy:.1f}" text-anchor="{da}" class="lab" fill="var(--down)">{low_t}</text>
 <circle cx="{xe:.1f}" cy="{ye:.1f}" r="8" fill="var(--ink)" stroke="var(--dot-ring)" stroke-width="2"/>
-<rect x="{xr+10}" y="{ye-23:.1f}" width="{r-12}" height="46" rx="8" fill="var(--lab-bg)" stroke="var(--navy-track)" stroke-width="2"/>
-<text x="{xr+10+(r-12)/2:.1f}" y="{ye+8:.1f}" text-anchor="middle" class="lab" fill="var(--lab-fg)">{vn(pts[-1][1],2)}</text>
+<rect x="{xr+8}" y="{ye-26:.1f}" width="{r-8}" height="52" rx="8" fill="var(--lab-bg)"/>
+<text x="{xr+8+(r-8)/2:.1f}" y="{ye+10:.1f}" text-anchor="middle" class="lab" fill="var(--lab-fg)">{vn(pts[-1][1],2)}</text>
 <text x="{rx:.1f}" y="{ry:.1f}" text-anchor="{ra}" class="lab" fill="var(--gold-strong)">{ref_t}</text>
 {ticks}</svg>'''
 
@@ -375,9 +376,7 @@ def render(day):
     html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê giữa phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
 <header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Giữa phiên · {data["time"]} · {dow}, {dstr}</span></div><img src="../assets/logo.png" alt="WeHa"></header>
 <div class="band">Thống kê giữa phiên</div>
-<div class="kick">Chốt phiên sáng · {dow} {dstr}</div>
 <h1 class="h1">{h1}</h1>
-<p class="lede"><b>Cách đọc:</b> {hero_read}</p>
 <section class="kpi">
 <div class="card-hero"><div class="eyebrow">VN-Index · {data["time"]}</div><div class="display-score">{vn(ix["value"],2)}</div>
 <div class="hrow"><span class="chg {cls(chg)} big">{vn(chg,2,True)} ({vn(chp,2,True)}%)</span><span class="badge b-{bcls}">{badge}</span></div></div>
@@ -389,7 +388,7 @@ def render(day):
 <div class="card">{price_chart(data)}</div>
 <h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · so sánh cùng thời điểm {data["time"]} · điểm đóng góp theo VCBS</p>
 <section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 1 tuần*", liq["week1"][-1], (cur/liq["week1"][-1]-1)*100), ("TB 2 tuần*", liq["week2"][-1], (cur/liq["week2"][-1]-1)*100), ("TB 1 tháng*", avg3, vs_a)])}</div><div class="lr"><div class="ct2">KL phiên sáng, triệu cp**</div>{cmp_rows([("Hôm nay", kl, None), ("Hôm qua", klp, (kl/klp-1)*100), ("TB 5 phiên", kl5, (kl/kl5-1)*100), (f"TB {n20} phiên", kl20, (kl/kl20-1)*100)])}</div></div>
-<div class="how-to-read"><b>Cách đọc:</b> {liq_read}<br><span class="fn">* Trung bình cùng giờ của các phiên trong 1 tuần, 2 tuần, 1 tháng gần nhất (1 tháng ≈ 20 phiên), không gồm hôm nay. ** Gồm thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
+<div class="how-to-read"><span class="fn">* Trung bình cùng giờ của các phiên trong 1 tuần, 2 tuần, 1 tháng gần nhất (1 tháng ≈ 20 phiên), không gồm hôm nay. ** Gồm thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
 <div class="card"><div class="ct">Kéo / đè chỉ số, điểm: {lift} nâng nhiều nhất, {drag} đè mạnh nhất</div>{contrib_chart(ct)}
 <p class="ln rest">Các mã còn lại cộng dồn: <b>{vn(rest,2,True)} điểm</b></p>
 <p class="ln">{dv["name"]}: <b class="chg {cls(dvc)}">{vn(dv["price"],1)} ({vn(dvc,2,True)}%)</b> · basis {vn(basis,1,True)}</p></div></section>
@@ -421,7 +420,7 @@ async def shot(html, png):
         await p.wait_for_timeout(300)
         bad = await p.evaluate("[...document.fonts].filter(f=>f.status!='loaded').map(f=>f.family)")
         h = await p.evaluate("document.documentElement.scrollHeight")
-        over = await p.evaluate("[...document.querySelectorAll('.ct,.ct2,.ln,.h1,.sh,.stat-sub,.sub,.lede')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
+        over = await p.evaluate("[...document.querySelectorAll('.ct,.ct2,.ln,.h1,.sh,.stat-sub,.sub,.lede,.hc b,.hc span,.cmp,.ctr,.stat-value,.badge')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
         await p.screenshot(path=str(png), full_page=True)
         await b.close()
     print(f"OK {png.name}: {int(W*SCALE)}x{int(h*SCALE)}px, cao/rộng {h/W:.2f}", "| FONT LOI:" if bad else "", bad or "", "| TRAN:" if over else "", over or "")

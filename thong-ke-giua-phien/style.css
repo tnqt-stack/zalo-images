@@ -106,15 +106,59 @@ svg{display:block}
 .hm-leg em{font-style:normal;margin-left:auto}
 .hm-note{font-size:24px;color:var(--text-2);margin-top:8px}
 
-/* ===== Giao diện tối WeHa (bản mẫu 19/11/2026) ===== */
-:root{color-scheme:dark;--surface-page:#0E1424;--surface:#161F33;--surface-soft:#202B44;--border:#2A3651;
---text:#F1F4FB;--ink:#F1F4FB;--text-2:#ACB8D0;--text-muted:#96A5BF;
---accent:#B6A5FF;--accent-soft:#2A2448;--accent-mark:#5944C5;
---gold:#E7A958;--gold-strong:#FFD089;--gold-fill:#3B2B1C;--neutral-bg:#3B2B1C;--neutral-strong:#FFD089;
---up:#82D8A7;--down:#F8A39A;--up-strong:#82D8A7;--down-strong:#F8A39A;--up-bg:#203B33;--down-bg:#452A34;
---zone-up-fill:rgba(58,154,105,.24);--zone-down-fill:rgba(214,91,89,.22);
---hm-flat:#202B44;--hm-up-max:#3A9A69;--hm-down-max:#D65B59;--s4:#6B7A97;
---footer-bg:#0E1424;--lab-bg:#2A3655;--lab-fg:#F1F4FB;--dot-ring:#161F33}
-.band{background:var(--navy-raised);box-shadow:inset 0 0 0 2px var(--navy-track)}
-.foot{box-shadow:inset 0 2px 0 var(--border)}
-.card-hero .b-up{background:#DEF1E7;color:#18663E}.card-hero .b-down{background:#FAE1DF;color:#AB342D}.card-hero .b-mid{background:#FFF1D9;color:#87540F}
+/* ===== WeHa bản sáng (19/11/2026): biến dùng trong build.py ===== */
+:root{--lab-bg:#19243B;--lab-fg:#FFFFFF;--dot-ring:#FFFFFF;--hm-flat:#EDF1F9}
+.band{background:var(--hero-gradient);box-shadow:inset 0 0 0 2px var(--navy-track)}
+
+/* ===== Lần 2: nâng chữ nhỏ ~0,5–1 cỡ, bớt khoảng trống để giữ tỷ lệ ===== */
+body{font-size:28px}
+.brand span{font-size:28px}
+.band{font-size:26px;margin-top:18px;padding:8px 22px}
+.kick{font-size:25px;margin-top:10px}
+.h1{margin:4px 0 10px}
+.lede{font-size:31px;margin-bottom:18px}
+.eyebrow{font-size:25px}
+.badge{font-size:26px;padding:5px 16px}
+.stat-label,.stat-sub{font-size:28px}
+.unit{font-size:26px}
+.sh{margin-top:18px;padding-top:14px}
+.sub{font-size:28px;margin:0 0 10px}
+.ax{font-size:26px}
+.note{font-size:26px}
+.lab{font-size:28px}
+.how-to-read{font-size:29px;margin-top:10px;padding-top:10px}
+.fn{font-size:27px}
+.ct{font-size:30px;margin-bottom:8px}
+.ct2{font-size:28px;margin-bottom:6px}
+.cmp{font-size:30px;grid-template-columns:1fr auto 124px;margin-bottom:8px}
+.cc{font-size:26px}
+.ctr{grid-template-columns:110px 1fr 124px;font-size:31px;line-height:1.5}
+.ln{font-size:30px;padding:8px 0}
+.sl{font-size:28px;margin:6px 0 4px}
+.wide-card{padding:20px 28px}
+.hm{gap:8px}
+.hc{padding:10px 4px 9px}
+.hc span{font-size:34px}
+.hm-leg{font-size:27px;margin-top:12px}
+.hm-note{font-size:27px;margin-top:6px}
+.foot{font-size:26px;margin-top:22px;padding:18px 40px}
+.foot .r{max-width:1150px}
+
+.band+.h1{margin-top:22px}
+/* ===== Lần 3: biểu đồ 01, thanh khoản, kéo/đè, độ rộng to thêm ~15% ===== */
+.ax{font-size:31px}
+.note{font-size:30px}
+.lab{font-size:33px}
+.ct{font-size:34px}
+.ct2{font-size:32px}
+.cmp{font-size:35px;grid-template-columns:1fr auto 140px}
+.cc{font-size:30px}
+.fn{font-size:30px}
+.ctr{grid-template-columns:130px 1fr 140px;font-size:36px}
+.ln{font-size:35px}
+.sl{font-size:33px}
+/* ===== Lần 4: tiêu đề mục 01–04 và chân ảnh to hơn ===== */
+.sh{font-size:44px}
+.sub{font-size:31px}
+.foot>div:first-child{font-size:32px;flex:none}
+.foot .r{max-width:none;flex:1}
