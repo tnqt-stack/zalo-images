@@ -1,0 +1,61 @@
+# Chép số Nhiệt kế, Ngành dẫn dắt và Tín hiệu vào nhiet-ke-nganh/nguon/, vì máy cloud của lịch Zalo 8:15 bị chặn pages.dev (403).
+# Chỉ ĐỌC số công khai, không dùng khóa nào. Tải lỗi hoặc file hỏng thì giữ nguyên bản cũ và báo đỏ.
+# Chạy khi: (1) lịch Zalo 8:15 đẩy file nhiet-ke-nganh/nguon/yeu-cau.txt (chạy ngay, không trễ như cron);
+#           (2) cron dự phòng 06:30 và 07:40 giờ VN thứ Hai đến thứ Sáu (cron GitHub có thể trễ); (3) bấm tay.
+name: Lay so Nhiet ke va Nganh dan dat
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nhiet-ke-nganh/nguon/yeu-cau.txt'
+      - '.github/workflows/lay-so-nhiet-ke-nganh.yml'
+  schedule:
+    - cron: '30 23 * * 0-4'
+    - cron: '40 0 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lay-so-nhiet-ke-nganh
+  cancel-in-progress: false
+jobs:
+  lay-so:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tai va kiem tra
+        run: |
+          set -euo pipefail
+          T=$(mktemp -d)
+          tai() { curl -fsS --retry 3 --retry-delay 10 -m 60 -o "$T/$2" "$1"; }
+          tai https://nhiet-ke-thi-truong.pages.dev/nhiet-ke.json nhiet-ke.json
+          for f in nganh vu_tru lich_su_ma; do
+            tai "https://nganh-dan-dat-data.pages.dev/$f.json" "ndd_$f.json"
+          done
+          # Tín hiệu chỉ dùng cho ô giai đoạn; lỗi thì bỏ qua, ảnh vẫn dựng được
+          tai https://tin-hieu-weha.study-nguyenhoai.workers.dev/tin-hieu-weha.json tin-hieu-weha.json || rm -f "$T/tin-hieu-weha.json"
+          python3 - "$T" <<'PY'
+          import json, pathlib, sys
+          t = pathlib.Path(sys.argv[1])
+          for p in sorted(t.glob("*.json")):
+              json.loads(p.read_text("utf8"))
+          nk = json.loads((t / "nhiet-ke.json").read_text("utf8"))
+          ls = json.loads((t / "ndd_lich_su_ma.json").read_text("utf8"))
+          print("Nhiet ke:", nk["date"], "| Nganh dan dat:", ls["ngay"][-1])
+          PY
+          mkdir -p nhiet-ke-nganh/nguon
+          cp "$T"/*.json nhiet-ke-nganh/nguon/
+          { date -u +%Y-%m-%dT%H:%M:%SZ; cat nhiet-ke-nganh/nguon/yeu-cau.txt 2>/dev/null || true; } > nhiet-ke-nganh/nguon/da-lay.txt
+      - name: Luu vao kho
+        run: |
+          git add nhiet-ke-nganh/nguon
+          if git diff --cached --quiet; then echo "Khong co gi moi"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Số Nhiệt kế và Ngành dẫn dắt: cập nhật nguồn cho lịch 8:15"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
