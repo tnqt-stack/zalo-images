@@ -172,11 +172,11 @@ def price_chart(data):
 <line x1="{l}" x2="{xr}" y1="{yr:.1f}" y2="{yr:.1f}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 6"/>
 <line x1="{xe:.1f}" x2="{xr+10}" y1="{ye:.1f}" y2="{ye:.1f}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
 <path d="{path}" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
-<circle cx="{lx:.1f}" cy="{ly:.1f}" r="7" fill="var(--down)" stroke="#fff" stroke-width="2"/>
+<circle cx="{lx:.1f}" cy="{ly:.1f}" r="7" fill="var(--down)" stroke="var(--dot-ring)" stroke-width="2"/>
 <text x="{dx:.1f}" y="{dy:.1f}" text-anchor="{da}" class="lab" fill="var(--down)">{low_t}</text>
-<circle cx="{xe:.1f}" cy="{ye:.1f}" r="8" fill="var(--ink)" stroke="#fff" stroke-width="2"/>
-<rect x="{xr+10}" y="{ye-23:.1f}" width="{r-12}" height="46" rx="8" fill="var(--ink)"/>
-<text x="{xr+10+(r-12)/2:.1f}" y="{ye+8:.1f}" text-anchor="middle" class="lab" fill="#fff">{vn(pts[-1][1],2)}</text>
+<circle cx="{xe:.1f}" cy="{ye:.1f}" r="8" fill="var(--ink)" stroke="var(--dot-ring)" stroke-width="2"/>
+<rect x="{xr+10}" y="{ye-23:.1f}" width="{r-12}" height="46" rx="8" fill="var(--lab-bg)" stroke="var(--navy-track)" stroke-width="2"/>
+<text x="{xr+10+(r-12)/2:.1f}" y="{ye+8:.1f}" text-anchor="middle" class="lab" fill="var(--lab-fg)">{vn(pts[-1][1],2)}</text>
 <text x="{rx:.1f}" y="{ry:.1f}" text-anchor="{ra}" class="lab" fill="var(--gold-strong)">{ref_t}</text>
 {ticks}</svg>'''
 
@@ -207,7 +207,7 @@ def liq_chart(liq):
         for i, lb, a in [(s, "09:20", "start"), (12, "10:00", "middle"), (30, "11:30 | 13:00", "middle"), (42, "14:00", "middle"), (n - 1, "15:00", "end")])
     return f'''<svg viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="Thanh khoản lũy kế theo giờ">{grid}{tk}
 {line(avg,'var(--s4)',3,'stroke-dasharray="9 7"')}{line(liq['prev'],'var(--gold)',3)}{line(liq['curr'],'var(--ink)',4.5)}
-<circle cx="{X(n-1):.1f}" cy="{Y(liq['curr'][-1]):.1f}" r="7" fill="var(--ink)" stroke="#fff" stroke-width="2"/></svg>'''
+<circle cx="{X(n-1):.1f}" cy="{Y(liq['curr'][-1]):.1f}" r="7" fill="var(--ink)" stroke="var(--dot-ring)" stroke-width="2"/></svg>'''
 
 
 def cmp_rows(rows):
@@ -264,8 +264,8 @@ def heat_style(p):
         return "background:var(--hm-flat)"
     t = min(abs(p) / 4, 1)
     side = "up" if p > 0 else "down"
-    fg = "#fff" if t >= .55 else "var(--text)"
-    return f"background:color-mix(in srgb,var(--{side}-bar) {t*100:.0f}%,var(--{side}-bg));color:{fg}"
+    fg = "#fff" if t >= .7 else "var(--text)"
+    return f"background:color-mix(in srgb,var(--hm-{side}-max) {t*100:.0f}%,var(--{side}-bg));color:{fg}"
 
 
 def heatmap(uni, q):
@@ -274,9 +274,9 @@ def heatmap(uni, q):
     cells = "".join(f'<div class="hc" style="{heat_style(pct(q, s))}"><b>{s}</b><span>{vn(pct(q, s),2,True)}%</span></div>'
                     for s, _ in caps)
     ex = "VHM" if "VHM" in q else caps[1][0]
-    leg = ('<div class="hm-leg"><span><i style="background:var(--down-bar)"></i>Giảm mạnh</span>'
+    leg = ('<div class="hm-leg"><span><i style="background:var(--hm-down-max)"></i>Giảm mạnh</span>'
            '<span><i style="background:var(--hm-flat)"></i>Đứng giá</span>'
-           '<span><i style="background:var(--up-bar)"></i>Tăng mạnh</span>'
+           '<span><i style="background:var(--hm-up-max)"></i>Tăng mạnh</span>'
            '<em>60 mã vốn hóa lớn HOSE</em></div>'
            f'<p class="hm-note">Số trong ô là % thay đổi so với giá tham chiếu, làm tròn 2 chữ số thập phân, '
            f'ví dụ {ex} {vn(pct(q, ex),2,True)}%. Màu đậm dần theo mức tăng/giảm, đậm nhất từ ±4%.</p>')
