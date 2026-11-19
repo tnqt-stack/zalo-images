@@ -303,12 +303,8 @@ def dung(m, nganh, vutru, ls, th, GT):
     lb = [f'Em gửi mọi người Nhiệt kế thị trường và Ngành dẫn dắt sau phiên {d.strftime("%d/%m")} ạ.', ""]
     lb.append(f'- Nhiệt kế {n(m["diem"], 1)} điểm, vùng {m["vung"]}; tỷ trọng cổ phiếu gợi ý '
               f'{"giữ ở" if eq == eq0 else verb} {eq}%.')
-    if gd_dong:
-        lb.append(f"- {gd_dong}")
+    # Anh Trung chốt 20/11/2026: lời bình chỉ 3 gạch đầu dòng (Nhiệt kế, Top 5 ngành, link); phần còn lại đã có trên ảnh
     lb.append(f'- Top 5 ngành: {", ".join(r["nganh"] for r in top5)}.')
-    if moi_vao:
-        lb.append(f"- {join_vi(moi_vao)} mới vào top 5.")
-    lb.append(f"- Còn {so_manh} trong {tong} mã có tín hiệu Mạnh, phiên trước là {so_manh_truoc}.")
     lb.append("- Chi tiết tham khảo tại weha.com.vn.")
     return html, "\n".join(lb) + "\n"
 
