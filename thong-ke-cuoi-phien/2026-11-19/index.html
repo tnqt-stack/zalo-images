@@ -1,0 +1,166 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê cuối phiên 19/11/2026</title><style>@font-face{font-family:Inter;src:url(../assets/fonts/Inter.ttf);font-weight:100 900}
+@font-face{font-family:Lora;src:url(../assets/fonts/Lora.ttf);font-weight:400 700}
+:root{--navy:#171F38;--navy-raised:#2A3655;--navy-track:#485578;--gold:#A56B20;--gold-strong:#87540F;--gold-light:#FFD089;--gold-fill:#FFF1D9;--accent:#5944C5;--accent-soft:#EDE9FF;--accent-on-dark:#B6A5FF;--accent-mark:#B6A5FF;--hero-gradient:linear-gradient(148deg,#293761,#171F38 72%);
+--surface-page:#F5F7FC;--surface:#FFFFFF;--surface-soft:#EDF1F9;--text:#19243B;--text-2:#52617B;--text-muted:#62728D;--border:#DCE3F0;--on-dark:#F1F4FB;--on-dark-2:#C1CBE2;
+--up:#18663E;--down:#AB342D;--up-bg:#DEF1E7;--down-bg:#FAE1DF;--neutral-bg:#FFF1D9;--up-strong:#18663E;--down-strong:#AB342D;--neutral-strong:#87540F;--up-on-dark:#82D8A7;--down-on-dark:#F8A39A;--up-bar:#3A9A69;--down-bar:#D65B59;
+--zone-up-fill:rgba(58,154,105,.19);--zone-down-fill:rgba(214,91,89,.17);--ink:#19243B;--hero-bg:#171F38;--footer-bg:#171F38;--s4:#8D9AB3;--hm-flat:#DCE3F0;--hm-up-max:#18663E;--hm-down-max:#AB342D;
+--font-sans:"Inter",sans-serif;--font-serif:"Lora",serif;--shadow-card:0 0 0 2px var(--border)}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font-sans);font-size:26px;line-height:1.45;color:var(--text);background:var(--surface-page);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.canvas{width:2400px;padding:40px 40px 0}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:4px solid var(--ink)}
+.top img{height:76px}
+.meta{display:flex;flex-direction:column;align-items:flex-end;font-size:24px;color:var(--text-2);line-height:1.3}
+.meta b{color:var(--ink);font-size:28px}
+.tag{font-size:22px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.h1{font-family:var(--font-serif);font-variant-numeric:normal;word-spacing:-.08em;font-size:62px;font-weight:700;line-height:1.2;color:var(--ink);margin:8px 0 14px}
+.h1 mark{background:linear-gradient(transparent 62%,var(--accent-mark) 62%);color:inherit}
+.band{background:var(--ink);color:var(--on-dark);border-radius:10px;padding:10px 22px;margin-top:24px;font-size:24px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.kick{font-size:23px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-top:14px}
+.lede{font-size:29px;line-height:1.45;color:var(--text-2);margin-bottom:24px}.lede b{color:var(--ink)}
+.kpi{display:grid;grid-template-columns:1.32fr 1fr 1fr 1fr;gap:16px}
+.card-hero{background:var(--hero-gradient);box-shadow:inset 0 0 0 2px var(--navy-track);color:var(--on-dark);border-radius:32px;padding:22px 32px}
+.eyebrow{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-on-dark)}
+.display-score{font-family:var(--font-serif);font-size:88px;font-variant-numeric:lining-nums proportional-nums;font-weight:700;line-height:1.1;letter-spacing:-.01em;margin-top:2px}
+.hrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.chg{font-weight:600;white-space:nowrap}.chg.up{color:var(--up)}.chg.down{color:var(--down)}.chg.flat{color:var(--text-2)}
+.card-hero .chg.up{color:var(--up-on-dark)}.card-hero .chg.down{color:var(--down-on-dark)}
+.chg.big{font-size:34px}
+.badge{padding:6px 16px;border-radius:16px;font-size:23px;font-weight:600}
+.b-up{background:var(--up-bg);color:var(--up-strong)}.b-down{background:var(--down-bg);color:var(--down-strong)}.b-mid{background:var(--neutral-bg);color:var(--neutral-strong)}
+.how-to-read{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:26px;line-height:1.45;color:var(--text-2)}
+.card-hero .how-to-read{border-top-color:var(--navy-track);color:var(--on-dark-2)}.card-hero .how-to-read b{color:var(--on-dark)}
+.how-to-read b{color:var(--ink)}
+.stat-tile{background:var(--surface);border-radius:32px;box-shadow:var(--shadow-card);padding:22px 28px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.stat-label,.stat-sub{font-size:23px;color:var(--text-2);line-height:1.3}
+.stat-value{font-family:var(--font-serif);font-variant-numeric:lining-nums proportional-nums;font-size:62px;font-weight:700;line-height:1.15;color:var(--ink)}
+.stat-value.down{color:var(--down)}.stat-value.up{color:var(--up)}
+.unit{font-family:var(--font-sans);font-size:23px;font-weight:500;color:var(--text-2);margin-left:8px}
+.sh{font-size:36px;font-weight:700;line-height:1.3;color:var(--ink);margin-top:28px;padding-top:22px;border-top:1px solid var(--border)}
+.sh em{font-family:var(--font-serif);font-style:normal;font-variant-numeric:lining-nums;color:var(--accent);margin-right:14px}
+.sub{font-size:25px;color:var(--text-2);margin:2px 0 12px}
+.card{background:var(--surface);border-radius:32px;box-shadow:var(--shadow-card);padding:16px}
+svg{display:block}
+.ax{font:22px var(--font-sans);fill:var(--text-muted)}
+.note{font:500 24px var(--font-sans);fill:var(--text-2)}
+.lab{font:700 24px var(--font-sans)}
+.liq{display:grid;grid-template-columns:1.06fr 1fr;gap:10px 32px;padding:20px 24px}.lrs{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-content:center}
+.lc{min-width:0}
+.lg{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:22px;color:var(--text-2)}
+.lg span{display:inline-flex;align-items:center;gap:8px}
+.lg i{width:26px;height:6px;border-radius:3px;display:inline-block}
+.lg i.dash{background:repeating-linear-gradient(90deg,var(--s4) 0 8px,transparent 8px 13px)}
+.cap{font-size:22px;color:var(--text-2);margin-top:4px}
+.ct{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.cmp{display:grid;grid-template-columns:1fr auto 110px;column-gap:10px;align-items:baseline;font-size:26px;margin-bottom:10px}
+.cl{color:var(--text-2)}.cv{font-weight:700;color:var(--ink)}.cc{text-align:right;font-size:22px}
+.cb{grid-column:1/-1;height:10px;border-radius:5px;background:var(--surface-soft);margin-top:3px;overflow:hidden}
+.cb i{display:block;height:100%;border-radius:5px}
+.fn{font-size:24px;color:var(--text-2)}
+.wide{grid-column:1/-1;margin-top:2px}
+.heat{position:relative;overflow:hidden;border-radius:12px;background:var(--ink)}
+.hg{position:absolute;outline:2px solid var(--ink);outline-offset:-1px;overflow:hidden}
+.hl{position:absolute;left:0;top:0;right:0;height:34px;padding:0 10px;background:var(--ink);color:var(--on-dark);font-size:22px;line-height:34px;font-weight:600;white-space:nowrap;overflow:hidden}
+.ht{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;line-height:1.08;outline:1px solid var(--surface);outline-offset:-.5px;color:var(--text);overflow:hidden}
+.ht small{font-weight:600}.ht.row{flex-direction:row;gap:8px}
+.h3u{background:var(--hm-up-max);color:#fff}.h2u{background:color-mix(in srgb,var(--hm-up-max) 50%,var(--up-bg));color:var(--text)}.h1u{background:var(--up-bg)}
+.h0{background:var(--neutral-bg)}
+.h1d{background:var(--down-bg)}.h2d{background:color-mix(in srgb,var(--hm-down-max) 50%,var(--down-bg));color:var(--text)}.h3d{background:var(--hm-down-max);color:#fff}
+.scale{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:22px;color:var(--text-2)}
+.scale i{width:56px;height:16px;border-radius:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two .card{padding:20px}
+.stack{display:flex;height:34px;border-radius:10px;overflow:hidden;margin-top:4px}
+.sl{display:flex;justify-content:space-between;font-size:25px;margin:8px 0 6px}.nt{color:var(--neutral-strong);font-weight:600}
+.ln{font-size:26px;line-height:1.4;color:var(--text-2);padding:10px 0;border-top:1px solid var(--border)}.ln b{color:var(--ink)}
+.ln b.chg.up{color:var(--up)}.ln b.chg.down{color:var(--down)}
+.rest{margin-top:6px}
+.ctr{display:grid;grid-template-columns:84px 1fr 100px;align-items:center;font-size:27px;line-height:1.5}
+.sy{font-weight:600;color:var(--ink)}.nv{text-align:right}
+.tr{position:relative;height:20px;display:block}.tr i{position:absolute;top:0;bottom:0;border-radius:3px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;background:var(--footer-bg);color:var(--on-dark-2);font-size:22px;line-height:1.4;margin:28px -40px 0;padding:22px 40px}
+.foot b{color:var(--on-dark)}.foot .r{max-width:860px;text-align:right}
+.ct{font-size:28px}.stat-label,.stat-sub{font-size:25px}
+
+.top{border-bottom:2px solid var(--border)}
+.top img{height:84px}
+.brand{display:flex;flex-direction:column;gap:4px}
+.brand b{font-family:var(--font-serif);font-variant-numeric:normal;word-spacing:-.04em;font-size:46px;font-weight:700;line-height:1.1;color:var(--ink)}
+.brand span{font-size:25px;color:var(--text-2)}
+.band{background:var(--hero-bg)}
+.card,.stat-tile{border-radius:32px}
+.two .card{display:flex;flex-direction:column}
+.ct2{font-size:25px;font-weight:600;color:var(--text-2);margin-bottom:8px}
+.liq2 .lrs{grid-template-columns:1fr 1fr;gap:32px;margin-top:6px}
+.liq2 .how-to-read{margin-top:auto}
+.ctr{grid-template-columns:96px 1fr 110px;font-size:28px;line-height:1.6}
+.wide-card{padding:24px 28px}
+.wide-card .lns{display:block}
+.hm{display:grid;grid-template-columns:repeat(10,1fr);gap:10px}
+.hc{border-radius:16px;padding:14px 6px 12px;text-align:center;color:var(--text);line-height:1.15}
+.hc b{display:block;font-size:38px;font-weight:700}
+.hc span{display:block;font-size:30px;font-weight:600;margin-top:2px}
+.hm-leg{display:flex;align-items:center;gap:28px;margin-top:16px;font-size:24px;color:var(--text-2)}
+.hm-leg span{display:inline-flex;align-items:center;gap:10px}
+.hm-leg i{width:26px;height:26px;border-radius:6px;display:inline-block}
+.hm-leg em{font-style:normal;margin-left:auto}
+.hm-note{font-size:24px;color:var(--text-2);margin-top:8px}
+
+/* ===== Giao diện tối WeHa (bản mẫu 19/11/2026) ===== */
+:root{color-scheme:dark;--surface-page:#0E1424;--surface:#161F33;--surface-soft:#202B44;--border:#2A3651;
+--text:#F1F4FB;--ink:#F1F4FB;--text-2:#ACB8D0;--text-muted:#96A5BF;
+--accent:#B6A5FF;--accent-soft:#2A2448;--accent-mark:#5944C5;
+--gold:#E7A958;--gold-strong:#FFD089;--gold-fill:#3B2B1C;--neutral-bg:#3B2B1C;--neutral-strong:#FFD089;
+--up:#82D8A7;--down:#F8A39A;--up-strong:#82D8A7;--down-strong:#F8A39A;--up-bg:#203B33;--down-bg:#452A34;
+--zone-up-fill:rgba(58,154,105,.24);--zone-down-fill:rgba(214,91,89,.22);
+--hm-flat:#202B44;--hm-up-max:#3A9A69;--hm-down-max:#D65B59;--s4:#6B7A97;
+--footer-bg:#0E1424;--lab-bg:#2A3655;--lab-fg:#F1F4FB;--dot-ring:#161F33}
+.band{background:var(--navy-raised);box-shadow:inset 0 0 0 2px var(--navy-track)}
+.foot{box-shadow:inset 0 2px 0 var(--border)}
+.card-hero .b-up{background:#DEF1E7;color:#18663E}.card-hero .b-down{background:#FAE1DF;color:#AB342D}.card-hero .b-mid{background:#FFF1D9;color:#87540F}
+</style></head><body><main class="canvas">
+<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Cuối phiên · 15:00 · Thứ Năm, 19/11/2026</span></div><img src="../assets/logo.png" alt="WeHa"></header>
+<div class="band">Thống kê cuối phiên</div>
+<div class="kick">Đóng cửa · Thứ Năm 19/11/2026</div>
+<h1 class="h1">VN-Index giảm <mark>13.39 điểm</mark> phiên hôm nay; bất động sản, ngân hàng kéo lùi, VIC đè mạnh nhất</h1>
+<p class="lede"><b>Cách đọc:</b> Chỉ số dao động trong biên 1,677.63 – 1,703.01, yếu nhất quanh 14:36, đóng cửa 1,689.62, dưới tham chiếu 13.39 điểm.</p>
+<section class="kpi">
+<div class="card-hero"><div class="eyebrow">VN-Index · đóng cửa</div><div class="display-score">1,689.62</div>
+<div class="hrow"><span class="chg down big">−13.39 (−0.79%)</span><span class="badge b-mid">Chốt giữa biên độ</span></div></div>
+<div class="stat-tile"><div class="stat-label">Biên độ cả phiên</div><div class="stat-value">25.4<span class="unit">điểm</span></div><div class="stat-sub">1,677.63 – 1,703.01</div></div>
+<div class="stat-tile"><div class="stat-label">Giá trị khớp lệnh</div><div class="stat-value">9,328<span class="unit">tỷ đồng</span></div><div class="stat-sub">Thỏa thuận thêm 5,681 tỷ đồng</div></div>
+<div class="stat-tile"><div class="stat-label">Khối ngoại khớp lệnh</div><div class="stat-value down">−999<span class="unit">tỷ đồng</span></div><div class="stat-sub">Bán ròng mạnh FPT, ACB, VIC</div></div>
+</section>
+<h2 class="sh"><em>01</em>Diễn biến trong phiên</h2><p class="sub">VN-Index theo nến 5 phút, gộp giờ nghỉ trưa · nét đứt vàng: tham chiếu</p>
+<div class="card"><svg viewBox="0 0 2288 340" width="100%" role="img" aria-label="VN-Index theo nến 5 phút">
+<defs><clipPath id="ab"><rect x="0" y="0" width="2288" height="38.1"/></clipPath>
+<clipPath id="be"><rect x="0" y="38.1" width="2288" height="340"/></clipPath></defs>
+<line x1="16" x2="2138" y1="222.8" y2="222.8" stroke="var(--border)"/><text x="2152" y="230.8" class="ax">1,680</text><line x1="16" x2="2138" y1="142.5" y2="142.5" stroke="var(--border)"/><line x1="16" x2="2138" y1="62.2" y2="62.2" stroke="var(--border)"/><text x="2152" y="70.2" class="ax">1,700</text><line x1="1209.6" x2="1209.6" y1="14" y2="298" stroke="var(--border)" stroke-width="2" stroke-dasharray="4 6"/>
+<path d="M16.0,68.5 L60.2,47.8 L104.4,104.0 L148.6,75.0 L192.8,50.7 L237.0,78.1 L281.2,81.5 L325.5,93.1 L369.7,105.7 L413.9,123.8 L458.1,125.5 L502.3,150.2 L546.5,152.3 L590.7,165.2 L634.9,189.2 L679.1,184.7 L723.3,179.6 L767.5,162.5 L811.8,135.1 L856.0,118.8 L900.2,112.3 L944.4,107.0 L988.6,126.8 L1032.8,139.9 L1077.0,126.2 L1121.2,145.0 L1165.4,152.5 L1209.6,151.4 L1209.6,151.4 L1253.8,147.7 L1298.0,147.2 L1342.2,113.5 L1386.5,100.0 L1430.7,113.7 L1474.9,126.1 L1519.1,121.2 L1563.3,114.7 L1607.5,117.2 L1651.7,102.3 L1695.9,111.4 L1740.1,96.5 L1784.3,98.4 L1828.5,106.2 L1872.8,122.5 L1917.0,146.5 L1961.2,151.7 L2005.4,181.1 L2049.6,238.8 L2093.8,176.3 L2138.0,145.6 L2138.0,38.1 L16.0,38.1 Z" fill="var(--zone-up-fill)" clip-path="url(#ab)"/>
+<path d="M16.0,68.5 L60.2,47.8 L104.4,104.0 L148.6,75.0 L192.8,50.7 L237.0,78.1 L281.2,81.5 L325.5,93.1 L369.7,105.7 L413.9,123.8 L458.1,125.5 L502.3,150.2 L546.5,152.3 L590.7,165.2 L634.9,189.2 L679.1,184.7 L723.3,179.6 L767.5,162.5 L811.8,135.1 L856.0,118.8 L900.2,112.3 L944.4,107.0 L988.6,126.8 L1032.8,139.9 L1077.0,126.2 L1121.2,145.0 L1165.4,152.5 L1209.6,151.4 L1209.6,151.4 L1253.8,147.7 L1298.0,147.2 L1342.2,113.5 L1386.5,100.0 L1430.7,113.7 L1474.9,126.1 L1519.1,121.2 L1563.3,114.7 L1607.5,117.2 L1651.7,102.3 L1695.9,111.4 L1740.1,96.5 L1784.3,98.4 L1828.5,106.2 L1872.8,122.5 L1917.0,146.5 L1961.2,151.7 L2005.4,181.1 L2049.6,238.8 L2093.8,176.3 L2138.0,145.6 L2138.0,38.1 L16.0,38.1 Z" fill="var(--zone-down-fill)" clip-path="url(#be)"/>
+<line x1="16" x2="2138" y1="38.1" y2="38.1" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 6"/>
+<line x1="2138.0" x2="2148" y1="145.6" y2="145.6" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 6"/>
+<path d="M16.0,68.5 L60.2,47.8 L104.4,104.0 L148.6,75.0 L192.8,50.7 L237.0,78.1 L281.2,81.5 L325.5,93.1 L369.7,105.7 L413.9,123.8 L458.1,125.5 L502.3,150.2 L546.5,152.3 L590.7,165.2 L634.9,189.2 L679.1,184.7 L723.3,179.6 L767.5,162.5 L811.8,135.1 L856.0,118.8 L900.2,112.3 L944.4,107.0 L988.6,126.8 L1032.8,139.9 L1077.0,126.2 L1121.2,145.0 L1165.4,152.5 L1209.6,151.4 L1209.6,151.4 L1253.8,147.7 L1298.0,147.2 L1342.2,113.5 L1386.5,100.0 L1430.7,113.7 L1474.9,126.1 L1519.1,121.2 L1563.3,114.7 L1607.5,117.2 L1651.7,102.3 L1695.9,111.4 L1740.1,96.5 L1784.3,98.4 L1828.5,106.2 L1872.8,122.5 L1917.0,146.5 L1961.2,151.7 L2005.4,181.1 L2049.6,238.8 L2093.8,176.3 L2138.0,145.6" fill="none" stroke="var(--ink)" stroke-width="3.5" stroke-linejoin="round"/>
+<circle cx="2049.6" cy="238.8" r="7" fill="var(--down)" stroke="var(--dot-ring)" stroke-width="2"/>
+<text x="2059.6" y="276.8" text-anchor="end" class="lab" fill="var(--down)">Thấp nhất 1,678.01</text>
+<circle cx="2138.0" cy="145.6" r="8" fill="var(--ink)" stroke="var(--dot-ring)" stroke-width="2"/>
+<rect x="2148" y="122.6" width="138" height="46" rx="8" fill="var(--lab-bg)" stroke="var(--navy-track)" stroke-width="2"/>
+<text x="2217.0" y="153.6" text-anchor="middle" class="lab" fill="var(--lab-fg)">1,689.62</text>
+<text x="2124.0" y="26.1" text-anchor="end" class="lab" fill="var(--gold-strong)">Tham chiếu 1,703.01</text>
+<text x="148.6" y="330" text-anchor="middle" class="ax">09:30</text><text x="679.1" y="330" text-anchor="middle" class="ax">10:30</text><text x="1209.6" y="330" text-anchor="middle" class="ax">11:30 | 13:00</text><text x="1740.1" y="330" text-anchor="middle" class="ax">14:00</text><text x="2138.0" y="330" text-anchor="middle" class="ax">14:45</text></svg></div>
+<h2 class="sh"><em>02</em>Thanh khoản thấp hơn hôm qua 16.4%, thấp hơn TB 1 tháng 23.3%</h2><p class="sub">Sàn HOSE · lũy kế cả phiên đến 15:00 · điểm đóng góp theo VCBS</p>
+<section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div><div class="cmp"><span class="cl">Hôm nay</span><span class="cv">9,328</span><span class="cc"></span><span class="cb"><i style="width:76.7%;background:var(--ink)"></i></span></div><div class="cmp"><span class="cl">Hôm qua</span><span class="cv">11,157</span><span class="cc"><span class="chg down">−16.4%</span></span><span class="cb"><i style="width:91.7%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 1 tuần*</span><span class="cv">9,767</span><span class="cc"><span class="chg down">−4.5%</span></span><span class="cb"><i style="width:80.3%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 2 tuần*</span><span class="cv">10,860</span><span class="cc"><span class="chg down">−14.1%</span></span><span class="cb"><i style="width:89.3%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 1 tháng*</span><span class="cv">12,164</span><span class="cc"><span class="chg down">−23.3%</span></span><span class="cb"><i style="width:100.0%;background:var(--s4)"></i></span></div></div><div class="lr"><div class="ct2">Gồm thỏa thuận, tỷ đồng**</div><div class="cmp"><span class="cl">Hôm nay</span><span class="cv">15,009</span><span class="cc"></span><span class="cb"><i style="width:86.0%;background:var(--ink)"></i></span></div><div class="cmp"><span class="cl">Hôm qua</span><span class="cv">17,454</span><span class="cc"><span class="chg down">−14.0%</span></span><span class="cb"><i style="width:100.0%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 1 tuần*</span><span class="cv">14,858</span><span class="cc"><span class="chg up">+1.0%</span></span><span class="cb"><i style="width:85.1%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 2 tuần*</span><span class="cv">15,327</span><span class="cc"><span class="chg down">−2.1%</span></span><span class="cb"><i style="width:87.8%;background:var(--s4)"></i></span></div><div class="cmp"><span class="cl">TB 1 tháng*</span><span class="cv">15,498</span><span class="cc"><span class="chg down">−3.2%</span></span><span class="cb"><i style="width:88.8%;background:var(--s4)"></i></span></div></div></div>
+<div class="how-to-read"><b>Cách đọc:</b> Dòng tiền thấp hơn cả hôm qua lẫn mức thường thấy, thị trường thiếu lực giao dịch. Riêng đợt ATC khớp 874 tỷ đồng.<br><span class="fn">* Trung bình các phiên trong 1 tuần, 2 tuần, 1 tháng gần nhất (1 tháng ≈ 20 phiên), không gồm hôm nay. ** Khớp lệnh cộng thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
+<div class="card"><div class="ct">Kéo / đè chỉ số, điểm: HVN nâng nhiều nhất, VIC đè mạnh nhất</div><div class="ctr"><span class="sy">HVN</span><span class="tr"><i style="left:50%;width:3.3%;background:var(--up-bar)"></i></span><span class="chg up nv">+0.58</span></div><div class="ctr"><span class="sy">GEE</span><span class="tr"><i style="left:50%;width:2.3%;background:var(--up-bar)"></i></span><span class="chg up nv">+0.40</span></div><div class="ctr"><span class="sy">BID</span><span class="tr"><i style="left:50%;width:1.4%;background:var(--up-bar)"></i></span><span class="chg up nv">+0.24</span></div><div class="ctr"><span class="sy">NAB</span><span class="tr"><i style="left:50%;width:1.0%;background:var(--up-bar)"></i></span><span class="chg up nv">+0.18</span></div><div class="ctr"><span class="sy">BSR</span><span class="tr"><i style="right:50%;width:3.3%;background:var(--down-bar)"></i></span><span class="chg down nv">−0.57</span></div><div class="ctr"><span class="sy">VHM</span><span class="tr"><i style="right:50%;width:3.9%;background:var(--down-bar)"></i></span><span class="chg down nv">−0.68</span></div><div class="ctr"><span class="sy">CTG</span><span class="tr"><i style="right:50%;width:4.6%;background:var(--down-bar)"></i></span><span class="chg down nv">−0.80</span></div><div class="ctr"><span class="sy">VIC</span><span class="tr"><i style="right:50%;width:46.0%;background:var(--down-bar)"></i></span><span class="chg down nv">−7.99</span></div>
+<p class="ln rest">Các mã còn lại cộng dồn: <b>−4.75 điểm</b></p>
+<p class="ln">VN30F 11/2026: <b class="chg down">1,787.9 (−1.49%)</b> · basis −0.6</p></div></section>
+<h2 class="sh"><em>03</em>20 trong 60 mã vốn hóa lớn tăng, 29 mã giảm</h2><p class="sub">Bản đồ nhiệt 60 mã lớn nhất HOSE · xếp theo vốn hóa, màu theo % thay đổi</p>
+<div class="card"><div class="hm"><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 51%,var(--down-bg));color:var(--text)"><b>VIC</b><span>−2.04%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 16%,var(--down-bg));color:var(--text)"><b>VHM</b><span>−0.66%</span></div><div class="hc" style="background:var(--hm-flat)"><b>VCB</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 12%,var(--up-bg));color:var(--text)"><b>BID</b><span>+0.49%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 41%,var(--down-bg));color:var(--text)"><b>CTG</b><span>−1.64%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 18%,var(--down-bg));color:var(--text)"><b>TCB</b><span>−0.72%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 12%,var(--down-bg));color:var(--text)"><b>VPB</b><span>−0.48%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 13%,var(--down-bg));color:var(--text)"><b>MBB</b><span>−0.53%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 22%,var(--down-bg));color:var(--text)"><b>GAS</b><span>−0.86%</span></div><div class="hc" style="background:var(--hm-flat)"><b>HPG</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 2%,var(--up-bg));color:var(--text)"><b>MCH</b><span>+0.08%</span></div><div class="hc" style="background:var(--hm-flat)"><b>VPL</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 11%,var(--down-bg));color:var(--text)"><b>HDB</b><span>−0.45%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 57%,var(--down-bg));color:var(--text)"><b>BSR</b><span>−2.29%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 43%,var(--down-bg));color:var(--text)"><b>STB</b><span>−1.71%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 43%,var(--down-bg));color:var(--text)"><b>VNM</b><span>−1.73%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 18%,var(--up-bg));color:var(--text)"><b>GVR</b><span>+0.74%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 25%,var(--down-bg));color:var(--text)"><b>ACB</b><span>−0.99%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 21%,var(--down-bg));color:var(--text)"><b>MSN</b><span>−0.85%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 17%,var(--down-bg));color:var(--text)"><b>MWG</b><span>−0.69%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 57%,var(--down-bg));color:var(--text)"><b>LPB</b><span>−2.29%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 18%,var(--down-bg));color:var(--text)"><b>VJC</b><span>−0.72%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 66%,var(--down-bg));color:var(--text)"><b>FPT</b><span>−2.66%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 9%,var(--down-bg));color:var(--text)"><b>TCX</b><span>−0.36%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 10%,var(--down-bg));color:var(--text)"><b>DMX</b><span>−0.39%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 9%,var(--down-bg));color:var(--text)"><b>VCK</b><span>−0.37%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 100%,var(--up-bg));color:#fff"><b>HVN</b><span>+4.05%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 8%,var(--up-bg));color:var(--text)"><b>MSB</b><span>+0.30%</span></div><div class="hc" style="background:var(--hm-flat)"><b>SSI</b><span>0.00%</span></div><div class="hc" style="background:var(--hm-flat)"><b>SHB</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 14%,var(--down-bg));color:var(--text)"><b>SAB</b><span>−0.58%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 37%,var(--down-bg));color:var(--text)"><b>VRE</b><span>−1.47%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 9%,var(--up-bg));color:var(--text)"><b>VIB</b><span>+0.37%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 25%,var(--down-bg));color:var(--text)"><b>SSB</b><span>−1.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 71%,var(--down-bg));color:#fff"><b>BVH</b><span>−2.85%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 6%,var(--up-bg));color:var(--text)"><b>VPX</b><span>+0.22%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 12%,var(--up-bg));color:var(--text)"><b>PLX</b><span>+0.49%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 100%,var(--up-bg));color:#fff"><b>GEE</b><span>+5.13%</span></div><div class="hc" style="background:var(--hm-flat)"><b>TPB</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 32%,var(--up-bg));color:var(--text)"><b>BCM</b><span>+1.26%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 28%,var(--up-bg));color:var(--text)"><b>POW</b><span>+1.12%</span></div><div class="hc" style="background:var(--hm-flat)"><b>HCM</b><span>0.00%</span></div><div class="hc" style="background:var(--hm-flat)"><b>GMD</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 12%,var(--down-bg));color:var(--text)"><b>OCB</b><span>−0.47%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 10%,var(--up-bg));color:var(--text)"><b>VIX</b><span>+0.40%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 16%,var(--down-bg));color:var(--text)"><b>EIB</b><span>−0.63%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 38%,var(--up-bg));color:var(--text)"><b>GEX</b><span>+1.50%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 5%,var(--up-bg));color:var(--text)"><b>REE</b><span>+0.21%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 80%,var(--up-bg));color:#fff"><b>NAB</b><span>+3.20%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 14%,var(--up-bg));color:var(--text)"><b>FRT</b><span>+0.54%</span></div><div class="hc" style="background:var(--hm-flat)"><b>KBC</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 12%,var(--down-bg));color:var(--text)"><b>NVL</b><span>−0.48%</span></div><div class="hc" style="background:var(--hm-flat)"><b>PGV</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 52%,var(--up-bg));color:var(--text)"><b>GEL</b><span>+2.08%</span></div><div class="hc" style="background:var(--hm-flat)"><b>VCI</b><span>0.00%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 8%,var(--down-bg));color:var(--text)"><b>LPS</b><span>−0.33%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 34%,var(--up-bg));color:var(--text)"><b>VPI</b><span>+1.36%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 27%,var(--up-bg));color:var(--text)"><b>VND</b><span>+1.07%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-down-max) 6%,var(--down-bg));color:var(--text)"><b>SBT</b><span>−0.24%</span></div><div class="hc" style="background:color-mix(in srgb,var(--hm-up-max) 54%,var(--up-bg));color:var(--text)"><b>VGC</b><span>+2.14%</span></div></div><div class="hm-leg"><span><i style="background:var(--hm-down-max)"></i>Giảm mạnh</span><span><i style="background:var(--hm-flat)"></i>Đứng giá</span><span><i style="background:var(--hm-up-max)"></i>Tăng mạnh</span><em>60 mã vốn hóa lớn HOSE</em></div><p class="hm-note">Số trong ô là % thay đổi so với giá tham chiếu, làm tròn 2 chữ số thập phân, ví dụ VHM −0.66%. Màu đậm dần theo mức tăng/giảm, đậm nhất từ ±4%.</p></div>
+<h2 class="sh"><em>04</em>Độ rộng 60 mã lớn: bên giảm áp đảo</h2><p class="sub">Đếm số mã tăng, đứng, giảm trong 60 mã vốn hóa lớn HOSE · khối ngoại tính theo tỷ đồng</p>
+<div class="card wide-card"><div class="stack"><i style="flex:20;background:var(--up-bar)"></i><i style="flex:11;background:var(--gold)"></i><i style="flex:29;background:var(--down-bar)"></i></div>
+<div class="sl"><span class="chg up">▲ 20 tăng</span><span class="nt">11 đứng</span><span class="chg down">29 giảm ▼</span></div>
+<div class="lns"><p class="ln"><b>Tăng mạnh:</b> GEE +5.1% · HVN +4.0% · NAB +3.2% · VGC +2.1% · GEL +2.1%</p><p class="ln"><b>Chịu áp lực:</b> BVH −2.9% · FPT −2.7% · BSR −2.3% · LPB −2.3% · VIC −2.0%</p>
+<p class="ln"><b>Toàn sàn HOSE:</b> 145 tăng · 226 đứng · 524 giảm</p><p class="ln"><b>Khối ngoại:</b> bán FPT −261.1 · ACB −99.7 · VIC −74.8 · VIX −68.1 · mua  (tỷ đồng)</p></div></div>
+<footer class="foot"><div><b>WeHa - Wealth and Happiness</b> · weha.com.vn<br>Kỷ luật đầu tư bằng dữ liệu</div>
+<div class="r">Nguồn: VCBS · cập nhật 15:16 19/11/2026. Khối ngoại và thỏa thuận có thể được nguồn cập nhật thêm sau giờ giao dịch. Chỉ để tham khảo, không phải khuyến nghị đầu tư.</div></footer>
+</main></body></html>
