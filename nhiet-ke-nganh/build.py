@@ -18,6 +18,7 @@ import os
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent
@@ -314,6 +315,23 @@ JS_OVER = """[...document.querySelectorAll('body *')].filter(e=>e.scrollWidth>e.
  .map(e=>(e.className||e.tagName)+' | '+e.textContent.trim().slice(0,40))"""
 
 
+def compress(png):
+    """Nén PNG về 256 màu để dưới mức 2 MB của Zalo (ảnh trên 2 MB bị từ chối mã 424).
+    Chạy trong tiến trình Python riêng: Pillow có sẵn trên máy cloud bị hỏng, cài lại xong phải nạp mới."""
+    code = ("import sys; from PIL import Image; p = sys.argv[1]; "
+            "Image.open(p).convert('RGB').quantize(256, method=Image.Quantize.MEDIANCUT).save(p, optimize=True)")
+    before = png.stat().st_size
+    if subprocess.run([sys.executable, "-c", code, str(png)], capture_output=True).returncode:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--upgrade", "pillow"], capture_output=True)
+        r = subprocess.run([sys.executable, "-c", code, str(png)], capture_output=True, text=True)
+        if r.returncode:
+            die(6, "không nén được ảnh bằng Pillow: " + r.stderr[-500:])
+    after = png.stat().st_size
+    print(f"Nén ảnh: {before / 1e6:.2f} -> {after / 1e6:.2f} MB")
+    if after > 1_900_000:
+        die(6, f"ảnh vẫn nặng {after} byte, quá mức 2 MB của Zalo")
+
+
 async def _shot(html_path, png):
     from playwright.async_api import async_playwright
     async with async_playwright() as pw:
@@ -359,6 +377,7 @@ def shot(html_path, png):
     if loi:
         png.unlink(missing_ok=True)
         die(5, "; ".join(loi))
+    compress(png)
 
 
 # ---------------------------------------------------------------- main
