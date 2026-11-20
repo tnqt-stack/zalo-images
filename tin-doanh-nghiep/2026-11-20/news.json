@@ -1,0 +1,147 @@
+{
+ "date": "20/11/2026",
+ "items": [
+  {
+   "ticker": "ABB",
+   "exchange": "UPCOM",
+   "price": 16.9,
+   "change": 0.6,
+   "tag": "Phát hành",
+   "title": "ABBank được chấp thuận chào bán hơn 803 triệu cổ phiếu",
+   "summary": "UBCKNN cấp phép chào bán 803.39 triệu cổ phiếu giá 10,000 đồng, tỷ lệ 50%, thu về khoảng 8,034 tỷ đồng; đồng thời phát hành thưởng 12%.",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "HAG",
+   "exchange": "HOSE",
+   "price": 13.5,
+   "change": 0.0,
+   "tag": "Dự án/Hợp đồng",
+   "title": "HAGL đầu tư 3,050 tỷ đồng trồng thêm 5,000 ha cà phê",
+   "summary": "HĐQT HAGL đã trồng mới 10,000 ha cà phê trong 2026; kế hoạch 2027 trồng thêm 5,000 ha, vốn 3,050 tỷ đồng, lập công ty con hạ tầng vốn 60 tỷ đồng.",
+   "source": "Stockbiz"
+  },
+  {
+   "ticker": "HDB",
+   "exchange": "HOSE",
+   "price": 21.8,
+   "change": -1.58,
+   "tag": "Phát hành",
+   "title": "HDBank được cấp phép chào bán 20,000 tỷ đồng trái phiếu",
+   "summary": "UBCKNN cấp phép chào bán 200 triệu trái phiếu thứ cấp, mệnh giá 100,000 đồng, chia 3 đợt đến năm 2027, tổng giá trị 20,000 tỷ đồng.",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "IDP",
+   "exchange": "UPCOM",
+   "price": null,
+   "change": null,
+   "tag": "Cổ tức",
+   "title": "Sữa Quốc tế LOF tạm ứng cổ tức tiền mặt 32%, chi gần 198 tỷ đồng",
+   "summary": "Ngày đăng ký cuối cùng 04/12/2026, chi 3,200 đồng/cổ phiếu, thanh toán 23/12; lãi sau thuế 9 tháng gần 698 tỷ đồng, gần 100% kế hoạch năm.",
+   "source": "Tinnhanhchungkhoan"
+  },
+  {
+   "ticker": "MBB",
+   "exchange": "HOSE",
+   "price": 18.25,
+   "change": -2.41,
+   "tag": "Phát hành",
+   "title": "MB chào bán riêng lẻ 200 triệu cổ phiếu, thu hơn 3,000 tỷ đồng",
+   "summary": "Giá chào bán 15,090 đồng/cổ phiếu cho 6 nhà đầu tư (Viettel, SCIC, Vietcombank...), thu khoảng 3,018 tỷ đồng, tăng vốn điều lệ 2,000 tỷ đồng.",
+   "source": "Tinnhanhchungkhoan"
+  },
+  {
+   "ticker": "NVL",
+   "exchange": "HOSE",
+   "price": 9.98,
+   "change": -3.11,
+   "tag": "Phát hành",
+   "title": "Novaland lùi hạn thu tiền mua 800.7 triệu cổ phiếu chào bán",
+   "summary": "Hạn đăng ký, nộp tiền lùi sang 28/12 (lần thứ hai); giá 10,000 đồng, tỷ lệ 3:1, dự kiến thu gần 8,007 tỷ đồng, UBCKNN gia hạn giấy phép đến 11/01/2027.",
+   "source": "Vietnambiz"
+  },
+  {
+   "ticker": "PNJ",
+   "exchange": "HOSE",
+   "price": 13.5,
+   "change": -2.17,
+   "tag": "Nhân sự",
+   "title": "PNJ có thêm 3 giám đốc cao cấp từ nhiệm",
+   "summary": "Ba giám đốc cao cấp (Chiến lược, Nhân sự, Khách hàng và Bán lẻ) từ nhiệm theo nguyện vọng cá nhân, hiệu lực từ 26/11/2026.",
+   "source": "Mekong ASEAN"
+  },
+  {
+   "ticker": "SHS",
+   "exchange": "HNX",
+   "price": 13.2,
+   "change": 0.0,
+   "tag": "Nhân sự",
+   "title": "Tổng Giám đốc SHS làm Chủ tịch HĐQT BVIM",
+   "summary": "ĐHĐCĐ bất thường BVIM ngày 19/11 bầu ông Nguyễn Duy Linh, Tổng Giám đốc SHS, giữ chức Chủ tịch HĐQT nhiệm kỳ 2026-2030.",
+   "source": "CafeF"
+  },
+  {
+   "ticker": "TCB",
+   "exchange": "HOSE",
+   "price": 21.2,
+   "change": 2.91,
+   "tag": "Phát hành",
+   "title": "Techcombank phát hành 5,000 tỷ đồng trái phiếu trong 2 ngày",
+   "summary": "Hai lô trái phiếu riêng lẻ ngày 17-18/11, mỗi lô 2,500 tỷ đồng, kỳ hạn 36 tháng, lãi suất cố định 8.9%/năm.",
+   "source": "Người Đưa Tin"
+  },
+  {
+   "ticker": "VHC",
+   "exchange": "HOSE",
+   "price": 50.5,
+   "change": -1.37,
+   "tag": "KQKD",
+   "title": "Vĩnh Hoàn đạt doanh thu 1,263 tỷ đồng trong tháng 10/2026",
+   "summary": "Doanh thu tháng 10/2026 của Vĩnh Hoàn đạt 1,263 tỷ đồng, tăng 17% so với cùng kỳ.",
+   "source": "VietnamFinance"
+  },
+  {
+   "ticker": "VHM",
+   "exchange": "HOSE",
+   "price": 60.4,
+   "change": 0.0,
+   "tag": "Dự án/Hợp đồng",
+   "title": "Liên danh Vinhomes - SGC được chỉ định thầu 5 tuyến đường sắt Hà Nội",
+   "summary": "Gói thầu trọn gói trị giá 873,224 tỷ đồng (khoảng 33.8 tỷ USD) cho 5 tuyến đô thị số 1, 2, 8, 10, 14; thời gian 51 tháng, hoàn thành trước 31/12/2030.",
+   "source": "CafeF"
+  }
+ ],
+ "sectors": [
+  {
+   "sector": "Bất động sản",
+   "title": "Quốc hội thông qua thuế 0.2% đối với đất bỏ hoang",
+   "summary": "Từ 01/07/2027 đất bỏ hoang chịu thuế 0.2%, đất sử dụng sai mục đích 0.15%; luật sửa đổi các luật thuế có hiệu lực từ 01/01/2027.",
+   "source": "VietnamFinance"
+  },
+  {
+   "sector": "Ngân hàng",
+   "title": "Nợ xấu toàn ngành ngân hàng tăng lên 2.3% sau 9 tháng",
+   "summary": "Theo VIS Rating, nợ xấu toàn ngành tăng từ 2.2% (6 tháng) lên 2.3%; tỷ lệ cho vay trên tiền gửi giảm về 112%.",
+   "source": "MarketTimes"
+  },
+  {
+   "sector": "Thủy sản",
+   "title": "Xuất khẩu thủy sản 10 tháng đạt hơn 10.4 tỷ USD",
+   "summary": "Theo VASEP, xuất khẩu thủy sản 10 tháng tăng 12.1%; riêng tháng 10 đạt 1.32 tỷ USD, tăng 13.5%; tôm đạt 4.22 tỷ USD.",
+   "source": "VASEP/VCCI"
+  },
+  {
+   "sector": "Logistics",
+   "title": "Bộ Công Thương ban hành tiêu chí phân hạng trung tâm logistics",
+   "summary": "Thông tư 71/2026/TT-BCT ký ngày 19/11/2026 quy định tiêu chí phân loại, phân hạng trung tâm logistics, có hiệu lực từ 08/01/2027.",
+   "source": "Cổng TTĐT Chính phủ"
+  },
+  {
+   "sector": "Vàng",
+   "title": "Giá vàng nhẫn SJC giảm xuống 134 triệu đồng/lượng",
+   "summary": "Ngày 20/11 giá vàng nhẫn SJC ở mức 134 triệu đồng/lượng, giảm 1.5% so với phiên trước, giảm 6.8% trong một tháng, thấp nhất một năm.",
+   "source": "WiData"
+  }
+ ]
+}
