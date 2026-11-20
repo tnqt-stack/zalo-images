@@ -2,6 +2,7 @@
 """Thống kê giữa phiên WeHa: dữ liệu ngày -> HTML -> PNG.
 Dùng: python build.py 2026-11-04
 Cần trong thư mục ngày: data.json (mẫu: 2026-11-04/data.json). Mã VN30F tháng gần nhất: python build.py --vn30f"""
+import subprocess
 import asyncio
 import datetime as dt
 import json
@@ -408,6 +409,20 @@ def render(day):
     return out
 
 
+def compress(png):
+    """Nén PNG về 256 màu để dưới mức 2 MB của Zalo (ảnh 4200px gốc hay vượt 2 MB).
+    Chạy trong tiến trình Python riêng: Pillow có sẵn trên máy cloud bị hỏng, cài lại xong phải nạp mới."""
+    code = ("import sys; from PIL import Image; p = sys.argv[1]; "
+            "Image.open(p).convert('RGB').quantize(256, method=Image.Quantize.MEDIANCUT).save(p, optimize=True)")
+    before = png.stat().st_size
+    if subprocess.run([sys.executable, "-c", code, str(png)], capture_output=True).returncode:
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--upgrade", "pillow"], capture_output=True)
+        r = subprocess.run([sys.executable, "-c", code, str(png)], capture_output=True, text=True)
+        if r.returncode:
+            raise SystemExit("NEN LOI: không nén được ảnh bằng Pillow: " + r.stderr[-500:])
+    return before, png.stat().st_size
+
+
 async def shot(html, png):
     from playwright.async_api import async_playwright
     async with async_playwright() as pw:
@@ -423,7 +438,8 @@ async def shot(html, png):
         over = await p.evaluate("[...document.querySelectorAll('.ct,.ct2,.ln,.h1,.sh,.stat-sub,.sub,.lede,.hc b,.hc span,.cmp,.ctr,.stat-value,.badge')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.textContent.slice(0,24))")
         await p.screenshot(path=str(png), full_page=True)
         await b.close()
-    print(f"OK {png.name}: {int(W*SCALE)}x{int(h*SCALE)}px, cao/rộng {h/W:.2f}", "| FONT LOI:" if bad else "", bad or "", "| TRAN:" if over else "", over or "")
+    before, after = compress(png)
+    print(f"OK {png.name}: {int(W*SCALE)}x{int(h*SCALE)}px, cao/rộng {h/W:.2f}, {before/1e6:.2f}->{after/1e6:.2f} MB", "| QUA 2MB: Zalo se tu choi" if after > 1_900_000 else "", "| FONT LOI:" if bad else "", bad or "", "| TRAN:" if over else "", over or "")
 
 
 if __name__ == "__main__":
