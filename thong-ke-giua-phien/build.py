@@ -338,13 +338,13 @@ def render(day):
     drag = ct["down"][0][0]
     lift = ct["up"][0][0]
     if chg >= 0:
-        h1 = (f'VN-Index tăng <mark>{vn(abs(chg),2)} điểm</mark> sau phiên sáng; '
+        h1 = (f'Hết phiên sáng: VN-Index đang tăng <mark>{vn(abs(chg),2)} điểm</mark>; '
               f'{ind[0][0]}, {ind[1][0]} dẫn dắt, {drag} là lực cản lớn nhất')
     else:
-        h1 = f'VN-Index giảm <mark>{vn(abs(chg),2)} điểm</mark> sau phiên sáng; {drag} đè chỉ số, {lift} nâng đỡ'
+        h1 = f'Hết phiên sáng: VN-Index đang giảm <mark>{vn(abs(chg),2)} điểm</mark>; {drag} đè chỉ số, {lift} nâng đỡ'
     pos = (ix["value"] - ix["low"]) / (ix["high"] - ix["low"])
-    badge, bcls = (("Chốt sát đỉnh phiên", "up") if pos >= .8 else
-                   ("Chốt gần đáy phiên", "down") if pos <= .2 else ("Chốt giữa biên độ", "mid"))
+    badge, bcls = (("Đang sát đỉnh phiên", "up") if pos >= .8 else
+                   ("Đang gần đáy phiên", "down") if pos <= .2 else ("Đang giữa biên độ", "mid"))
     hero_read = (f'Chỉ số xuống thấp nhất {vn(ix["low"],2)} quanh {ix["low_time"]}, sau đó hồi '
                  f'{vn(ix["value"]-ix["low"],1)} điểm và chốt phiên sáng {"trên" if chg >= 0 else "dưới"} tham chiếu.')
     vs_p = (cur / prev - 1) * 100
@@ -374,12 +374,12 @@ def render(day):
     fbuy = " · ".join(f"{s} {vn(v,1,True)}" for s, v in fr["buy"][:3])
     lead = "Bên tăng áp đảo" if up > dn * 1.3 else "Bên giảm áp đảo" if dn > up * 1.3 else "Cân bằng"
     netlist = ", ".join(s for s, _ in (fr["sell"] if net < 0 else fr["buy"])[:3])
-    html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê giữa phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
-<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Giữa phiên · {data["time"]} · {dow}, {dstr}</span></div><img src="../assets/logo.png" alt="WeHa"></header>
-<div class="band">Thống kê giữa phiên</div>
+    html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê giữa phiên {dstr}</title><style>{css}</style></head><body><main class="canvas mid">
+<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>{dow}, {dstr}</span></div><div class="tr"><div class="clock"><b>{data["time"]}</b><span>Giữa phiên</span></div><img src="../assets/logo.png" alt="WeHa"></div></header>
+<div class="band">Thống kê giữa phiên · {data["time"]} · số tạm tính</div>
 <h1 class="h1">{h1}</h1>
 <section class="kpi">
-<div class="card-hero"><div class="eyebrow">VN-Index · {data["time"]}</div><div class="display-score">{vn(ix["value"],2)}</div>
+<div class="card-hero"><div class="eyebrow">VN-Index · tạm tính {data["time"]}</div><div class="display-score">{vn(ix["value"],2)}</div>
 <div class="hrow"><span class="chg {cls(chg)} big">{vn(chg,2,True)} ({vn(chp,2,True)}%)</span><span class="badge b-{bcls}">{badge}</span></div></div>
 <div class="stat-tile"><div class="stat-label">Biên độ phiên sáng</div><div class="stat-value">{vn(ix["high"]-ix["low"],1)}<span class="unit">điểm</span></div><div class="stat-sub">{vn(ix["low"],2)} – {vn(ix["high"],2)}</div></div>
 <div class="stat-tile"><div class="stat-label">Giá trị khớp lệnh</div><div class="stat-value">{vn(cur)}<span class="unit">tỷ đồng</span></div><div class="stat-sub">Thỏa thuận thêm {vn(liq["put_through"])} tỷ đồng</div></div>
@@ -387,7 +387,7 @@ def render(day):
 </section>
 <h2 class="sh"><em>01</em>Diễn biến trong phiên</h2><p class="sub">VN-Index theo nến 5 phút · nét đứt: tham chiếu</p>
 <div class="card">{price_chart(data)}</div>
-<h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · so sánh cùng thời điểm {data["time"]} · điểm đóng góp theo VCBS</p>
+<h2 class="sh"><em>02</em>{liq_title}</h2><p class="sub">Sàn HOSE · lũy kế đến {data["time"]} · so sánh cùng thời điểm {data["time"]} · điểm đóng góp theo VCBS</p>
 <section class="two"><div class="card liq2"><div class="ct">Thanh khoản</div><div class="lrs"><div class="lr"><div class="ct2">Giá trị khớp lệnh, tỷ đồng</div>{cmp_rows([("Hôm nay", cur, None), ("Hôm qua", prev, vs_p), ("TB 1 tuần*", liq["week1"][-1], (cur/liq["week1"][-1]-1)*100), ("TB 2 tuần*", liq["week2"][-1], (cur/liq["week2"][-1]-1)*100), ("TB 1 tháng*", avg3, vs_a)])}</div><div class="lr"><div class="ct2">KL phiên sáng, triệu cp**</div>{cmp_rows([("Hôm nay", kl, None), ("Hôm qua", klp, (kl/klp-1)*100), ("TB 5 phiên", kl5, (kl/kl5-1)*100), (f"TB {n20} phiên", kl20, (kl/kl20-1)*100)])}</div></div>
 <div class="how-to-read"><span class="fn">* Trung bình cùng giờ của các phiên trong 1 tuần, 2 tuần, 1 tháng gần nhất (1 tháng ≈ 20 phiên), không gồm hôm nay. ** Gồm thỏa thuận. % là hôm nay so với mốc đó.</span></div></div>
 <div class="card"><div class="ct">Kéo / đè chỉ số, điểm: {lift} nâng nhiều nhất, {drag} đè mạnh nhất</div>{contrib_chart(ct)}

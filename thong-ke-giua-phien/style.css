@@ -162,3 +162,12 @@ body{font-size:28px}
 .sub{font-size:31px}
 .foot>div:first-child{font-size:32px;flex:none}
 .foot .r{max-width:none;flex:1}
+
+/* Thẻ giờ + màu theo bản (thử 27/11/2026) */
+.top .tr{display:flex;align-items:center;gap:28px}
+.clock{display:flex;align-items:center;gap:16px;background:var(--hero-bg);color:#fff;border-radius:22px;padding:10px 26px 10px 24px}
+.clock b{font-family:var(--font-serif);font-variant-numeric:lining-nums proportional-nums;font-size:76px;font-weight:700;line-height:1}
+.clock span{font-size:26px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--clock-label,#B6A5FF);max-width:5.2em;line-height:1.15}
+.band{font-size:28px;padding:12px 24px}
+.mid{--hero-bg:#8A4807;--hero-gradient:linear-gradient(148deg,#934C08,#723A05 72%);--navy-track:#C98536;--ink-band:#8A4807;--clock-label:#FFE2B8;--accent-on-dark:#FFE2B8;--up-on-dark:#B9F5CF;--down-on-dark:#FFD0CA;--on-dark-2:#FBE6CC}
+.mid .band{background:var(--ink-band)}

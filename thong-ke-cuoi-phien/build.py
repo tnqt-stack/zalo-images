@@ -369,8 +369,8 @@ def render(day):
     lead = "Bên tăng áp đảo" if up > dn * 1.3 else "Bên giảm áp đảo" if dn > up * 1.3 else "Cân bằng"
     netlist = ", ".join(s for s, _ in (fr["sell"] if net < 0 else fr["buy"])[:3])
     html = f'''<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Thống kê cuối phiên {dstr}</title><style>{css}</style></head><body><main class="canvas">
-<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Cuối phiên · {data["time"]} · {dow}, {dstr}</span></div><img src="../assets/logo.png" alt="WeHa"></header>
-<div class="band">Thống kê cuối phiên</div>
+<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>{dow}, {dstr}</span></div><div class="tr"><div class="clock"><b>15:00</b><span>Cuối phiên</span></div><img src="../assets/logo.png" alt="WeHa"></div></header>
+<div class="band">Thống kê cuối phiên · 15:00 · số chốt cả ngày</div>
 <h1 class="h1">{h1}</h1>
 <section class="kpi">
 <div class="card-hero"><div class="eyebrow">VN-Index · đóng cửa</div><div class="display-score">{vn(ix["value"],2)}</div>
