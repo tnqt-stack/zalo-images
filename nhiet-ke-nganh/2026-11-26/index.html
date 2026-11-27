@@ -1,0 +1,424 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Nhiệt kế và Ngành dẫn dắt 26/11/2026</title><style>/* Nhiệt kế + Ngành dẫn dắt, ảnh ngang WeHa bản sáng. Phần 1: khung chung (chép nguyên thong-ke-cuoi-phien/style.css). Phần 2: ghi đè cho ảnh ngang (chép nguyên ngang.css của bản mẫu đã duyệt, giữ đúng thứ tự để ảnh giống hệt). */
+@font-face{font-family:Inter;src:url(../assets/fonts/Inter.ttf);font-weight:100 900}
+@font-face{font-family:Lora;src:url(../assets/fonts/Lora.ttf);font-weight:400 700}
+:root{--navy:#171F38;--navy-raised:#2A3655;--navy-track:#485578;--gold:#A56B20;--gold-strong:#87540F;--gold-light:#FFD089;--gold-fill:#FFF1D9;--accent:#5944C5;--accent-soft:#EDE9FF;--accent-on-dark:#B6A5FF;--accent-mark:#B6A5FF;--hero-gradient:linear-gradient(148deg,#293761,#171F38 72%);
+--surface-page:#F5F7FC;--surface:#FFFFFF;--surface-soft:#EDF1F9;--text:#19243B;--text-2:#52617B;--text-muted:#62728D;--border:#DCE3F0;--on-dark:#F1F4FB;--on-dark-2:#C1CBE2;
+--up:#18663E;--down:#AB342D;--up-bg:#DEF1E7;--down-bg:#FAE1DF;--neutral-bg:#FFF1D9;--up-strong:#18663E;--down-strong:#AB342D;--neutral-strong:#87540F;--up-on-dark:#82D8A7;--down-on-dark:#F8A39A;--up-bar:#3A9A69;--down-bar:#D65B59;
+--zone-up-fill:rgba(58,154,105,.19);--zone-down-fill:rgba(214,91,89,.17);--ink:#19243B;--hero-bg:#171F38;--footer-bg:#171F38;--s4:#8D9AB3;--hm-flat:#DCE3F0;--hm-up-max:#18663E;--hm-down-max:#AB342D;
+--font-sans:"Inter",sans-serif;--font-serif:"Lora",serif;--shadow-card:0 0 0 2px var(--border)}
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font-sans);font-size:26px;line-height:1.45;color:var(--text);background:var(--surface-page);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.canvas{width:2400px;padding:40px 40px 0}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:4px solid var(--ink)}
+.top img{height:76px}
+.meta{display:flex;flex-direction:column;align-items:flex-end;font-size:24px;color:var(--text-2);line-height:1.3}
+.meta b{color:var(--ink);font-size:28px}
+.tag{font-size:22px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.h1{font-family:var(--font-serif);font-variant-numeric:normal;word-spacing:-.08em;font-size:62px;font-weight:700;line-height:1.2;color:var(--ink);margin:8px 0 14px}
+.h1 mark{background:linear-gradient(transparent 62%,var(--accent-mark) 62%);color:inherit}
+.band{background:var(--ink);color:var(--on-dark);border-radius:10px;padding:10px 22px;margin-top:24px;font-size:24px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.kick{font-size:23px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-top:14px}
+.lede{font-size:29px;line-height:1.45;color:var(--text-2);margin-bottom:24px}.lede b{color:var(--ink)}
+.kpi{display:grid;grid-template-columns:1.32fr 1fr 1fr 1fr;gap:16px}
+.card-hero{background:var(--hero-gradient);box-shadow:inset 0 0 0 2px var(--navy-track);color:var(--on-dark);border-radius:32px;padding:22px 32px}
+.eyebrow{font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-on-dark)}
+.display-score{font-family:var(--font-serif);font-size:88px;font-variant-numeric:lining-nums proportional-nums;font-weight:700;line-height:1.1;letter-spacing:-.01em;margin-top:2px}
+.hrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
+.chg{font-weight:600;white-space:nowrap}.chg.up{color:var(--up)}.chg.down{color:var(--down)}.chg.flat{color:var(--text-2)}
+.card-hero .chg.up{color:var(--up-on-dark)}.card-hero .chg.down{color:var(--down-on-dark)}
+.chg.big{font-size:34px}
+.badge{padding:6px 16px;border-radius:16px;font-size:23px;font-weight:600}
+.b-up{background:var(--up-bg);color:var(--up-strong)}.b-down{background:var(--down-bg);color:var(--down-strong)}.b-mid{background:var(--neutral-bg);color:var(--neutral-strong)}
+.how-to-read{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:26px;line-height:1.45;color:var(--text-2)}
+.card-hero .how-to-read{border-top-color:var(--navy-track);color:var(--on-dark-2)}.card-hero .how-to-read b{color:var(--on-dark)}
+.how-to-read b{color:var(--ink)}
+.stat-tile{background:var(--surface);border-radius:32px;box-shadow:var(--shadow-card);padding:22px 28px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.stat-label,.stat-sub{font-size:23px;color:var(--text-2);line-height:1.3}
+.stat-value{font-family:var(--font-serif);font-variant-numeric:lining-nums proportional-nums;font-size:62px;font-weight:700;line-height:1.15;color:var(--ink)}
+.stat-value.down{color:var(--down)}.stat-value.up{color:var(--up)}
+.unit{font-family:var(--font-sans);font-size:23px;font-weight:500;color:var(--text-2);margin-left:8px}
+.sh{font-size:36px;font-weight:700;line-height:1.3;color:var(--ink);margin-top:28px;padding-top:22px;border-top:1px solid var(--border)}
+.sh em{font-family:var(--font-serif);font-style:normal;font-variant-numeric:lining-nums;color:var(--accent);margin-right:14px}
+.sub{font-size:25px;color:var(--text-2);margin:2px 0 12px}
+.card{background:var(--surface);border-radius:32px;box-shadow:var(--shadow-card);padding:16px}
+svg{display:block}
+.ax{font:22px var(--font-sans);fill:var(--text-muted)}
+.note{font:500 24px var(--font-sans);fill:var(--text-2)}
+.lab{font:700 24px var(--font-sans)}
+.liq{display:grid;grid-template-columns:1.06fr 1fr;gap:10px 32px;padding:20px 24px}.lrs{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-content:center}
+.lc{min-width:0}
+.lg{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:22px;color:var(--text-2)}
+.lg span{display:inline-flex;align-items:center;gap:8px}
+.lg i{width:26px;height:6px;border-radius:3px;display:inline-block}
+.lg i.dash{background:repeating-linear-gradient(90deg,var(--s4) 0 8px,transparent 8px 13px)}
+.cap{font-size:22px;color:var(--text-2);margin-top:4px}
+.ct{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.cmp{display:grid;grid-template-columns:1fr auto 110px;column-gap:10px;align-items:baseline;font-size:26px;margin-bottom:10px}
+.cl{color:var(--text-2)}.cv{font-weight:700;color:var(--ink)}.cc{text-align:right;font-size:22px}
+.cb{grid-column:1/-1;height:10px;border-radius:5px;background:var(--surface-soft);margin-top:3px;overflow:hidden}
+.cb i{display:block;height:100%;border-radius:5px}
+.fn{font-size:24px;color:var(--text-2)}
+.wide{grid-column:1/-1;margin-top:2px}
+.heat{position:relative;overflow:hidden;border-radius:12px;background:var(--ink)}
+.hg{position:absolute;outline:2px solid var(--ink);outline-offset:-1px;overflow:hidden}
+.hl{position:absolute;left:0;top:0;right:0;height:34px;padding:0 10px;background:var(--ink);color:var(--on-dark);font-size:22px;line-height:34px;font-weight:600;white-space:nowrap;overflow:hidden}
+.ht{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;line-height:1.08;outline:1px solid var(--surface);outline-offset:-.5px;color:var(--text);overflow:hidden}
+.ht small{font-weight:600}.ht.row{flex-direction:row;gap:8px}
+.h3u{background:var(--hm-up-max);color:#fff}.h2u{background:color-mix(in srgb,var(--hm-up-max) 50%,var(--up-bg));color:var(--text)}.h1u{background:var(--up-bg)}
+.h0{background:var(--neutral-bg)}
+.h1d{background:var(--down-bg)}.h2d{background:color-mix(in srgb,var(--hm-down-max) 50%,var(--down-bg));color:var(--text)}.h3d{background:var(--hm-down-max);color:#fff}
+.scale{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:22px;color:var(--text-2)}
+.scale i{width:56px;height:16px;border-radius:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two .card{padding:20px}
+.stack{display:flex;height:34px;border-radius:10px;overflow:hidden;margin-top:4px}
+.sl{display:flex;justify-content:space-between;font-size:25px;margin:8px 0 6px}.nt{color:var(--neutral-strong);font-weight:600}
+.ln{font-size:26px;line-height:1.4;color:var(--text-2);padding:10px 0;border-top:1px solid var(--border)}.ln b{color:var(--ink)}
+.ln b.chg.up{color:var(--up)}.ln b.chg.down{color:var(--down)}
+.rest{margin-top:6px}
+.ctr{display:grid;grid-template-columns:84px 1fr 100px;align-items:center;font-size:27px;line-height:1.5}
+.sy{font-weight:600;color:var(--ink)}.nv{text-align:right}
+.tr{position:relative;height:20px;display:block}.tr i{position:absolute;top:0;bottom:0;border-radius:3px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;background:var(--footer-bg);color:var(--on-dark-2);font-size:22px;line-height:1.4;margin:28px -40px 0;padding:22px 40px}
+.foot b{color:var(--on-dark)}.foot .r{max-width:860px;text-align:right}
+.ct{font-size:28px}.stat-label,.stat-sub{font-size:25px}
+
+.top{border-bottom:2px solid var(--border)}
+.top img{height:84px}
+.brand{display:flex;flex-direction:column;gap:4px}
+.brand b{font-family:var(--font-serif);font-variant-numeric:normal;word-spacing:-.04em;font-size:46px;font-weight:700;line-height:1.1;color:var(--ink)}
+.brand span{font-size:25px;color:var(--text-2)}
+.band{background:var(--hero-bg)}
+.card,.stat-tile{border-radius:32px}
+.two .card{display:flex;flex-direction:column}
+.ct2{font-size:25px;font-weight:600;color:var(--text-2);margin-bottom:8px}
+.liq2 .lrs{grid-template-columns:1fr 1fr;gap:32px;margin-top:6px}
+.liq2 .how-to-read{margin-top:auto}
+.ctr{grid-template-columns:96px 1fr 110px;font-size:28px;line-height:1.6}
+.wide-card{padding:24px 28px}
+.wide-card .lns{display:block}
+.hm{display:grid;grid-template-columns:repeat(10,1fr);gap:10px}
+.hc{border-radius:16px;padding:14px 6px 12px;text-align:center;color:var(--text);line-height:1.15}
+.hc b{display:block;font-size:38px;font-weight:700}
+.hc span{display:block;font-size:30px;font-weight:600;margin-top:2px}
+.hm-leg{display:flex;align-items:center;gap:28px;margin-top:16px;font-size:24px;color:var(--text-2)}
+.hm-leg span{display:inline-flex;align-items:center;gap:10px}
+.hm-leg i{width:26px;height:26px;border-radius:6px;display:inline-block}
+.hm-leg em{font-style:normal;margin-left:auto}
+.hm-note{font-size:24px;color:var(--text-2);margin-top:8px}
+
+/* ===== WeHa bản sáng (19/11/2026): biến dùng trong build.py ===== */
+:root{--lab-bg:#19243B;--lab-fg:#FFFFFF;--dot-ring:#FFFFFF;--hm-flat:#EDF1F9}
+.band{background:var(--hero-gradient);box-shadow:inset 0 0 0 2px var(--navy-track)}
+
+/* ===== Lần 2: nâng chữ nhỏ ~0,5–1 cỡ, bớt khoảng trống để giữ tỷ lệ ===== */
+body{font-size:28px}
+.brand span{font-size:28px}
+.band{font-size:26px;margin-top:18px;padding:8px 22px}
+.kick{font-size:25px;margin-top:10px}
+.h1{margin:4px 0 10px}
+.lede{font-size:31px;margin-bottom:18px}
+.eyebrow{font-size:25px}
+.badge{font-size:26px;padding:5px 16px}
+.stat-label,.stat-sub{font-size:28px}
+.unit{font-size:26px}
+.sh{margin-top:18px;padding-top:14px}
+.sub{font-size:28px;margin:0 0 10px}
+.ax{font-size:26px}
+.note{font-size:26px}
+.lab{font-size:28px}
+.how-to-read{font-size:29px;margin-top:10px;padding-top:10px}
+.fn{font-size:27px}
+.ct{font-size:30px;margin-bottom:8px}
+.ct2{font-size:28px;margin-bottom:6px}
+.cmp{font-size:30px;grid-template-columns:1fr auto 124px;margin-bottom:8px}
+.cc{font-size:26px}
+.ctr{grid-template-columns:110px 1fr 124px;font-size:31px;line-height:1.5}
+.ln{font-size:30px;padding:8px 0}
+.sl{font-size:28px;margin:6px 0 4px}
+.wide-card{padding:20px 28px}
+.hm{gap:8px}
+.hc{padding:10px 4px 9px}
+.hc span{font-size:34px}
+.hm-leg{font-size:27px;margin-top:12px}
+.hm-note{font-size:27px;margin-top:6px}
+.foot{font-size:26px;margin-top:22px;padding:18px 40px}
+.foot .r{max-width:1150px}
+
+.band+.h1{margin-top:22px}
+/* ===== Lần 3: biểu đồ 01, thanh khoản, kéo/đè, độ rộng to thêm ~15% ===== */
+.ax{font-size:31px}
+.note{font-size:30px}
+.lab{font-size:33px}
+.ct{font-size:34px}
+.ct2{font-size:32px}
+.cmp{font-size:35px;grid-template-columns:1fr auto 140px}
+.cc{font-size:30px}
+.fn{font-size:30px}
+.ctr{grid-template-columns:130px 1fr 140px;font-size:36px}
+.ln{font-size:35px}
+.sl{font-size:33px}
+/* ===== Lần 4: tiêu đề mục 01–04 và chân ảnh to hơn ===== */
+.sh{font-size:44px}
+.sub{font-size:31px}
+.foot>div:first-child{font-size:32px;flex:none}
+.foot .r{max-width:none;flex:1}
+
+/* ===================== Phần 2: ảnh ngang ===================== */
+/* Ảnh ngang WeHa bản sáng (2400 CSS, cao theo nội dung ≤ 1700). Nạp sau style-sang.css.
+   Theo wehadesign: một thẻ hero, thẻ phẳng viền 2px --border bo 32px, Lora chỉ cho h1 và số lớn,
+   tím chỉ cho tag / số mục. Khoảng cách theo thang 8/12/16/24/32. Không mã màu cứng (chỉ dùng biến). */
+
+.canvas{display:flex;flex-direction:column;padding:28px 40px 0}
+.top{padding-bottom:16px;border-bottom:2px solid var(--border)}
+.top img{height:72px}
+.brand b{font-size:42px}
+.brand span{font-size:27px}
+.stat-label,.sh,.eyebrow,.brand span,.stat-sub,.foot,.tag,.pair-l,.actions{font-variant-numeric:normal}
+
+/* tag tím (không nền) + h1 */
+.tag{font-size:25px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);line-height:1.2;white-space:nowrap}
+.tag-top{margin-top:24px}
+.h1{font-size:56px;line-height:1.15;margin:8px 0 0;word-spacing:-.02em;white-space:nowrap}
+.band+.h1{margin-top:8px}
+.h1 mark{white-space:nowrap}
+
+/* thẻ chung: nền trắng, viền 2px, bo 32px, không bóng */
+.card,.stat-tile{background:var(--surface);box-shadow:inset 0 0 0 2px var(--border);border-radius:32px}
+
+/* ===== Hàng Nhiệt kế: hero + 3 ô ===== */
+.kpi{display:grid;gap:16px;margin-top:24px}
+.kpi.k3{grid-template-columns:2.05fr 1fr 1.42fr 1.38fr}
+.kpi.k2{grid-template-columns:2.05fr 1.2fr 1.6fr}
+.card-hero{padding:20px 28px 16px;border-radius:32px}
+.card-hero .eyebrow{font-size:25px}
+.hrow{gap:16px;margin-top:0;flex-wrap:nowrap}
+.display-score{font-size:84px;line-height:1.05}
+.display-score small{font-family:var(--font-sans);font-size:30px;font-weight:500;color:var(--on-dark-2);margin-left:8px;letter-spacing:0}
+.card-hero .badge{font-size:26px;white-space:nowrap}
+.hist{margin-left:auto;text-align:right;font-size:26px;line-height:1.3;color:var(--on-dark-2);white-space:nowrap}
+.hist b{color:var(--on-dark);font-variant-numeric:lining-nums proportional-nums}
+.stat-tile{padding:20px 24px;justify-content:flex-start;gap:4px}
+.stat-label{font-size:27px;line-height:1.25;color:var(--text-2);text-wrap:balance}
+.stat-value{font-size:58px;line-height:1.1}
+.stat-sub{font-size:26px;line-height:1.3;color:var(--text-2);text-wrap:pretty;margin-top:auto}
+.stat-sub b{color:var(--ink);font-weight:600}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:4px 0 8px}
+.pair-l{font-size:25px;line-height:1.25;color:var(--text-2);text-wrap:balance;margin-top:2px}
+.stat-tile.warn{background:var(--down-bg);box-shadow:inset 0 0 0 2px var(--down)}
+.stat-tile.warn .stat-label{color:var(--down);font-weight:600}
+.stat-tile.warn .stat-sub{color:var(--text);margin-top:4px}
+.stat-tile.warn .stat-sub b{color:var(--text);font-weight:700}
+
+/* Thang 5 vùng: 5 đoạn rộng bằng nhau */
+.zs{position:relative;margin-top:12px}
+.zs-bar{display:flex;gap:6px;height:16px}
+.zs-bar i{display:block;flex:1;border-radius:4px;opacity:.38;position:relative}
+.zs-bar i.on{opacity:1}
+.z-down{background:var(--down-bar)}.z-mid{background:var(--gold)}.z-up{background:var(--up-bar)}
+.zs-mk{position:absolute;top:-9px;width:6px;height:34px;margin-left:-3px;border-radius:3px;background:var(--on-dark);box-shadow:0 0 0 3px var(--navy)}
+.zs-lab{display:flex;gap:6px;margin-top:8px}
+.zs-lab div{flex:1;min-width:0;font-size:24px;line-height:1.2;color:var(--on-dark-2);white-space:nowrap;font-variant-numeric:normal}
+.zs-lab div span{display:block;font-size:24px;color:var(--on-dark-2);opacity:.75}
+.zs-lab div.on{color:var(--on-dark);font-weight:600}
+.zs-lab div.on span{opacity:1;font-weight:500}
+
+/* ===== Tiêu đề mục: một kiểu cho 01/02/03, 24px trên, 12px dưới ===== */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin:24px 0 12px}
+.sh{font-size:38px;font-weight:700;line-height:1.2;color:var(--ink);margin:0;padding:0;border:0;white-space:nowrap}
+.sh em{font-family:var(--font-serif);font-style:normal;font-variant-numeric:lining-nums;color:var(--accent);margin-right:12px}
+.actions{display:flex;align-items:center;gap:24px;font-size:26px;color:var(--text-2);white-space:nowrap}
+.lgd{display:inline-flex;align-items:center;gap:8px}
+.lgd i{width:26px;height:26px;border-radius:8px;display:inline-block;box-shadow:inset 0 0 0 2px var(--border)}
+
+/* huy hiệu WeHa: bo 10px */
+.badge{display:inline-block;border-radius:10px;font-size:26px;font-weight:600;line-height:1.15;padding:4px 12px;white-space:nowrap}
+.b-up{background:var(--up-bg);color:var(--up-strong)}
+.b-mid{background:var(--neutral-bg);color:var(--neutral-strong)}
+.b-obs{background:var(--surface-soft);color:var(--text-2)}
+.b-down{background:var(--down-bg);color:var(--down)}
+.card-hero .badge{padding:6px 16px}
+/* huy hiệu nền trắng trên thẻ ngành nền nhạt */
+.bw-up,.bw-mid,.bw-obs,.bw-down{background:var(--surface)}
+.bw-up{color:var(--up-strong)}.bw-mid{color:var(--neutral-strong)}.bw-obs{color:var(--text-2);box-shadow:inset 0 0 0 2px var(--border)}.bw-down{color:var(--down)}
+
+/* ===== lưới 5 cột chung cho 01 và 02 ===== */
+.g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+
+/* 01: thẻ ngành */
+.ngc{border-radius:28px;padding:16px 24px 12px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.t-up{background:var(--up-bg)}.t-mid{background:var(--neutral-bg)}
+.t-obs{background:var(--surface);box-shadow:inset 0 0 0 2px var(--border)}.t-down{background:var(--down-bg)}
+.ngc-1{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ngc-h{font-size:25px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+.ngc-n{font-size:34px;font-weight:700;line-height:1.2;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ngc-3{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.ngc-v{font-family:var(--font-serif);font-size:60px;font-weight:700;line-height:1.05;font-variant-numeric:lining-nums proportional-nums}
+.t-up .ngc-v{color:var(--up-strong)}.t-mid .ngc-v{color:var(--neutral-strong)}.t-obs .ngc-v{color:var(--ink)}.t-down .ngc-v{color:var(--down)}
+.ngc-d{font-size:26px;color:var(--text-2);white-space:nowrap}
+
+/* 02: thẻ mã thẳng cột */
+.sec2 .section-head{margin-top:16px}
+.mac{padding:4px 20px}
+.mr{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;column-gap:14px;height:50px;border-bottom:1px solid var(--border);white-space:nowrap}
+.mr:last-child{border-bottom:0}
+.mr-m{font-size:34px;font-weight:700;color:var(--ink);min-width:86px}
+.mr-d{font-size:34px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.mr .chg{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.chg.flat{color:var(--text-2)}
+.mr .badge{font-size:25px;padding:3px 10px}
+
+/* dải các ngành còn lại */
+.tag-rest{margin:20px 0 8px}
+.restc{padding:12px 24px}
+.rg{display:grid;grid-template-columns:200px 1fr;align-items:baseline;column-gap:24px;padding:6px 0}
+.rg+.rg{border-top:1px solid var(--border)}
+.rg .badge{justify-self:start}
+.rg-l{display:flex;flex-wrap:wrap;gap:4px 30px;font-size:27px;line-height:1.45;color:var(--text)}
+.ri{white-space:nowrap}
+.ri b{font-weight:700;margin-left:4px;font-variant-numeric:tabular-nums}
+.v-up{color:var(--up-strong)}.v-mid{color:var(--neutral-strong)}.v-obs{color:var(--ink)}.v-down{color:var(--down)}
+
+/* ===== Chân ảnh ===== */
+.foot{margin:32px -40px 0;padding:16px 40px;font-size:26px;line-height:1.35;align-items:center;background:var(--footer-bg)}
+.foot>div:first-child{font-size:27px;flex:none}
+.foot .r{text-align:right;font-size:26px;text-wrap:balance;max-width:none;flex:1}
+
+/* Khoảng cách gọn (thang 8/12/16/24/32) */
+.nb{white-space:nowrap}
+.tag-top{margin-top:16px}
+.kpi{margin-top:16px}
+.foot{margin-top:24px;padding:12px 40px}
+.section-head{margin:20px 0 12px}
+.sec2 .section-head{margin-top:16px}
+.stat-tile .stat-sub{margin-top:4px}
+/* Lần 6b: gọn về ~1350 */
+.foot .r span{display:block}
+.canvas{padding-top:24px}
+.ngc{padding:12px 24px 8px;gap:2px}
+.mr{height:46px}
+.section-head{margin:16px 0 12px}
+.sec2 .section-head{margin-top:12px}
+.tag-rest{margin:16px 0 8px}
+.restc{padding:8px 24px}
+.rg{grid-template-columns:180px 1fr;padding:4px 0}
+.rg-l{font-size:26px;gap:4px 22px}
+/* 17 ngành: lưới 6 cột để không có mục lẻ một mình ở dòng cuối */
+.rg-l{display:grid;grid-template-columns:repeat(6,max-content);gap:4px 32px;font-size:27px}
+.mr{height:44px}
+.tag-rest{margin:12px 0 8px}
+
+/* Dải ngành còn lại: hai nhóm dùng chung một khuôn cột để thẳng hàng */
+.rg-l{grid-template-columns:1.25fr repeat(5,1fr);gap:4px 20px}
+.rg-l .ri{white-space:nowrap}
+
+/* Lần 7: mã tiêu biểu trong thẻ ngành */
+.sh-sub{font-size:26px;line-height:1.3;color:var(--text-2);margin:-4px 0 12px}
+.tb3{margin-top:8px;padding-top:8px;border-top:2px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.tb3-l{font-size:25px;line-height:1.3;color:var(--text-2)}
+.tb3-r{display:flex;justify-content:space-between;gap:12px;white-space:nowrap;margin-top:2px}
+.tb3-r span{display:inline-flex;align-items:baseline;gap:8px}
+.tb3-r b{font-size:28px;font-weight:700;color:var(--ink)}
+.tb3-r em{font-style:normal;font-size:28px;font-weight:600;font-variant-numeric:tabular-nums}
+.ngc{padding-bottom:12px}
+.mr{height:46px}
+/* Lần 7b: vừa mã tiêu biểu trên một dòng; bóp về ≤ 1480 */
+.ngc{padding:12px 20px 12px}
+.tb3-r{gap:8px}
+.tb3-r span{gap:6px}
+.tb3{margin-top:6px;padding-top:6px}
+.stat-tile{padding:16px 24px}
+.pair{margin:2px 0 4px}
+.mr{height:44px}
+.foot{padding:8px 40px}
+.section-head{margin:12px 0 12px}
+.sec2 .section-head{margin-top:12px}
+.tag-rest{margin:8px 0 8px}
+.top{padding-bottom:12px}
+.tag-top{margin-top:12px}
+
+/* ===== Lần 8: bớt chữ đậm; mã mạnh tiêu biểu; dải 17 ngành lên trên mục 02 ===== */
+.tag{font-weight:600}
+.card-hero .eyebrow{font-weight:600}
+.zs-lab div.on{font-weight:600}
+.hist .hv{color:var(--on-dark);font-weight:500;font-variant-numeric:lining-nums proportional-nums}
+.badge,.card-hero .badge,.mr .badge,.rg .badge{font-weight:500}
+.stat-label,.stat-tile.warn .stat-label,.pair-l,.stat-sub,.sh-sub,.actions,.foot .r{font-weight:400}
+.stat-tile.warn .stat-sub .w1{font-weight:600}
+.ngc-h{font-weight:500}
+.ngc-d{font-weight:400}
+/* mã mạnh tiêu biểu */
+.tb3-r .tm{font-size:28px;font-weight:600;color:var(--ink)}
+.tb3-r .td{font-size:28px;font-weight:500;font-variant-numeric:tabular-nums}
+.tb3-r.few{justify-content:flex-start;gap:28px}
+.tb3-none{font-size:25px;color:var(--text-2);line-height:1.4}
+/* mục 02 */
+.mac-n{font-size:25px;font-weight:600;color:var(--accent);line-height:1.3;padding:8px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mac{padding:4px 20px 8px}
+.mr-m{font-weight:600}
+.mr-d{font-weight:500}
+.mr .chg{font-weight:400}
+/* dải 17 ngành */
+.ri{font-weight:400}
+.ri .rv{font-weight:500;margin-left:4px;font-variant-numeric:tabular-nums}
+.sec-rest .tag-rest{margin:16px 0 8px}
+.sec2 .section-head{margin-top:16px}
+.mac{padding:0 20px 8px}
+.mac-n{padding:8px 0 0}
+.sec-rest .tag-rest{margin:12px 0 8px}
+.sec2 .section-head{margin-top:12px}
+.restc{padding:6px 24px}
+
+/* Lần 9: tên vùng đậm màu chữ chính, "lãi kỳ vọng âm" màu giảm, dòng dẫn về website trên chân ảnh */
+.stat-label .nhan{font-weight:700;color:var(--ink)}
+.am{color:var(--down);font-weight:600}
+.xem-them{margin-top:16px;font-size:28px;color:var(--text-2);text-align:center}
+.xem-them span{color:var(--accent);font-weight:600}
+.xem-them+.foot{margin-top:14px}
+
+/* ===== Lần 10: mục 02 tín hiệu mã trong phiên ===== */
+.g02{display:grid;grid-template-columns:400px minmax(0,1fr) minmax(0,1fr);gap:16px}
+.st-m{justify-content:center}
+.st-m .stat-value{font-size:64px}
+.st-m .unit{font-family:var(--font-sans);font-size:28px;font-weight:400;color:var(--text-2);margin-left:8px}
+.dsc{padding:12px 24px 8px;display:flex;flex-direction:column}
+.ds-h{margin-bottom:4px}
+.ds-g{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,auto);grid-auto-flow:column;column-gap:32px}
+.dr{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:baseline;column-gap:14px;height:44px;align-content:center;border-bottom:1px solid var(--border);white-space:nowrap}
+.dr:nth-child(4n){border-bottom:0}
+.dr-m{font-size:31px;font-weight:600;color:var(--ink);min-width:80px}
+.dr-d{font-size:31px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.dr-n{font-size:26px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis}
+.dr-more{display:flex;font-size:25px;color:var(--text-2)}
+.ds-none{font-size:26px;color:var(--text-2);padding:8px 0}
+.dsc{padding:8px 24px 4px}.ds-h{margin-bottom:2px}
+.dr:last-child{border-bottom:0}
+
+/* Danh sách đổi tín hiệu: xếp theo hàng (trái sang phải) để danh sách ngắn không dồn về một cột */
+.ds-g{grid-auto-flow:row;grid-template-rows:none}
+/* Lần 11: kẻ dưới theo hàng (bỏ luật theo cột cũ) */
+.dr:nth-child(4n),.dr:last-child{border-bottom:1px solid var(--border)}
+.dr.last{border-bottom:0}
+.st-m{padding:8px 24px;gap:0}.st-m .stat-value{font-size:56px;line-height:1.1}
+
+/* ===================== Phần 3: ô giai đoạn Trung tính / Thuận lợi (build.py) ===================== */
+.stat-tile.gd-mid{background:var(--neutral-bg);box-shadow:inset 0 0 0 2px var(--neutral-strong)}
+.stat-tile.gd-up{background:var(--up-bg);box-shadow:inset 0 0 0 2px var(--up-strong)}
+.stat-tile.gd-mid .stat-label{color:var(--neutral-strong);font-weight:400}
+.stat-tile.gd-up .stat-label{color:var(--up-strong);font-weight:400}
+.stat-value.mid,.gd-mid .stat-value{color:var(--neutral-strong)}
+.gd-up .stat-value{color:var(--up-strong)}
+.gd-mid .stat-sub,.gd-up .stat-sub{color:var(--text);margin-top:4px}
+.gd-mid .stat-sub .w1,.gd-up .stat-sub .w1{font-weight:600}
+</style></head><body><main class="canvas">
+<header class="top"><div class="brand"><b>WeHa - Wealth and Happiness</b><span>Sau phiên · Thứ Năm, 26/11/2026</span></div><img src="../assets/logo.png" alt="WeHa"></header>
+<div class="tag tag-top">Nhiệt kế thị trường · Ngành dẫn dắt</div>
+<h1 class="h1">Nhiệt kế <mark>33.4 điểm</mark>, vùng Thận trọng; tỷ trọng cổ phiếu gợi ý giữ 15%</h1>
+<section class="kpi k3"><div class="card-hero"><div class="eyebrow">Điểm thị trường</div><div class="hrow"><div class="display-score">33.4<small>/100</small></div><span class="badge b-down">Thận trọng</span><div class="hist">Tuần trước <span class="hv">32.9</span><br>1 tháng trước <span class="hv">37.2</span><br>3 tháng trước <span class="hv">36.2</span></div></div><div class="zs"><div class="zs-bar"><i class="z-down"></i><i class="z-down on"><b class="zs-mk" style="left:22.5%"></b></i><i class="z-mid"></i><i class="z-up"></i><i class="z-up"></i></div><div class="zs-lab"><div class="">Phòng thủ<span>0–30</span></div><div class="on">Thận trọng<span>30–45</span></div><div class="">Trung tính<span>45–60</span></div><div class="">Tích cực<span>60–75</span></div><div class="">Rất tích cực<span>75–100</span></div></div></div></div><div class="stat-tile"><div class="stat-label">Tỷ trọng cổ phiếu gợi ý</div><div class="stat-value">15%</div><div class="stat-sub">Không đổi so với tuần trước. <span class="nb">Trái phiếu, tiền gửi 55%</span> <span class="nb">· Vàng 10%</span> <span class="nb">· Tiền mặt 20%</span></div></div><div class="stat-tile"><div class="stat-label">Lịch sử khi thị trường ở vùng <strong class="nhan">Thận trọng</strong></div><div class="pair"><div><div class="stat-value down">-2.1%</div><div class="pair-l">VN-Index 3 tháng sau, trung bình</div></div><div><div class="stat-value">42%</div><div class="pair-l">cổ phiếu HOSE có lãi sau 3 tháng</div></div></div><div class="stat-sub">Tính trên các tuần cùng vùng từ 2016; <span class="nb">VN-Index</span> chỉ tăng ở 47% số lần.</div></div><div class="stat-tile warn"><div class="stat-label">Giai đoạn cho chiến lược</div><div class="stat-value down">Bất lợi</div><div class="stat-sub"><span class="w1">Chưa có chiến lược nào của WeHa phù hợp giai đoạn này.</span> Cả 4 chiến lược đều có <span class="am">lãi kỳ vọng âm</span> trong kiểm định lịch sử.</div></div></section>
+<section class="sec"><div class="section-head"><h2 class="sh"><em>01</em>Top 5 ngành: Điện + Năng lượng dẫn đầu; Ngân hàng tư nhân mới vào top 5</h2></div><div class="g5"><div class="ngc t-up"><div class="ngc-1"><span class="ngc-h">Hạng 1</span><span class="badge bw-up">Tham gia</span></div><div class="ngc-n">Điện + Năng lượng</div><div class="ngc-3"><span class="ngc-v">91.1</span><span class="ngc-d">▲ từ hạng 2</span></div><div class="tb3"><div class="tb3-l">Mã mạnh tiêu biểu</div><div class="tb3-r few"><span><span class="tm">POW</span><span class="td v-up">73.8</span></span><span><span class="tm">NT2</span><span class="td v-up">74.3</span></span></div></div></div><div class="ngc t-up"><div class="ngc-1"><span class="ngc-h">Hạng 2</span><span class="badge bw-up">Tham gia</span></div><div class="ngc-n">Bán lẻ + Tiêu dùng</div><div class="ngc-3"><span class="ngc-v">87.3</span><span class="ngc-d">▲ từ hạng 4</span></div><div class="tb3"><div class="tb3-l">Mã mạnh tiêu biểu</div><div class="tb3-r few"><span class="tb3-none">Chưa có mã Mạnh trong top 100</span></div></div></div><div class="ngc t-up"><div class="ngc-1"><span class="ngc-h">Hạng 3</span><span class="badge bw-up">Tham gia</span></div><div class="ngc-n">Xây dựng</div><div class="ngc-3"><span class="ngc-v">80.7</span><span class="ngc-d">▼ từ hạng 1</span></div><div class="tb3"><div class="tb3-l">Mã mạnh tiêu biểu</div><div class="tb3-r few"><span class="tb3-none">Chưa có mã Mạnh trong top 100</span></div></div></div><div class="ngc t-mid"><div class="ngc-1"><span class="ngc-h">Hạng 4</span><span class="badge bw-mid">Nắm giữ</span></div><div class="ngc-n">Vingroup</div><div class="ngc-3"><span class="ngc-v">74.0</span><span class="ngc-d">▼ từ hạng 3</span></div><div class="tb3"><div class="tb3-l">Mã mạnh tiêu biểu</div><div class="tb3-r few"><span><span class="tm">VPL</span><span class="td v-up">87.4</span></span></div></div></div><div class="ngc t-mid"><div class="ngc-1"><span class="ngc-h">Hạng 4</span><span class="badge bw-mid">Nắm giữ</span></div><div class="ngc-n">Ngân hàng tư nhân</div><div class="ngc-3"><span class="ngc-v">74.0</span><span class="ngc-d">▲ từ hạng 8</span></div><div class="tb3"><div class="tb3-l">Mã mạnh tiêu biểu</div><div class="tb3-r few"><span><span class="tm">MSB</span><span class="td v-up">76.1</span></span></div></div></div></div></section>
+<section class="sec sec-rest"><div class="tag tag-rest">17 ngành còn lại</div><div class="card restc"><div class="rg"><span class="badge b-obs">Quan sát · 7</span><div class="rg-l"><span class="ri">Vận tải <span class="rv v-obs">70.3</span></span><span class="ri">Bảo hiểm <span class="rv v-obs">61.8</span></span><span class="ri">VLXD <span class="rv v-obs">60.6</span></span><span class="ri">Đầu tư công <span class="rv v-obs">56.9</span></span><span class="ri">Dệt may <span class="rv v-obs">56.7</span></span><span class="ri">Chứng khoán <span class="rv v-obs">54.3</span></span><span class="ri">Thép <span class="rv v-obs">35.7</span></span></div></div><div class="rg"><span class="badge b-down">Rời bỏ · 10</span><div class="rg-l"><span class="ri">KCN <span class="rv v-down">50.3</span></span><span class="ri">Cảng biển <span class="rv v-down">45.8</span></span><span class="ri">Ngân hàng quốc doanh <span class="rv v-down">45.5</span></span><span class="ri">Bất động sản <span class="rv v-down">37.0</span></span><span class="ri">Công nghệ <span class="rv v-down">34.0</span></span><span class="ri">Y tế + Dược <span class="rv v-down">33.6</span></span><span class="ri">Hóa chất <span class="rv v-down">30.6</span></span><span class="ri">Viettel <span class="rv v-down">27.0</span></span><span class="ri">Dầu khí <span class="rv v-down">21.8</span></span><span class="ri">Thủy sản <span class="rv v-down">20.9</span></span></div></div></div></section>
+<section class="sec sec2"><div class="section-head"><h2 class="sh"><em>02</em>Tín hiệu mã trong top 100: 1 mã mới lên Mạnh, 12 mã mất Mạnh</h2><div class="actions"><span>Top 100 mã giao dịch nhiều nhất · so với phiên trước</span></div></div><div class="g02"><div class="stat-tile st-m"><div class="stat-label">Mã có tín hiệu Mạnh</div><div class="stat-value">20<span class="unit">/296 mã</span></div><div class="stat-sub">Phiên trước 30 mã</div></div><div class="card dsc"><div class="ds-h"><span class="badge b-up">Mới lên Mạnh · 1</span></div><div class="ds-g"><div class="dr last"><span class="dr-m">MSB</span><span class="dr-d">76.1</span><span class="dr-n">Ngân hàng tư nhân</span></div></div></div><div class="card dsc"><div class="ds-h"><span class="badge b-down">Mất tín hiệu Mạnh · 12</span></div><div class="ds-g"><div class="dr"><span class="dr-m">VIC</span><span class="dr-d">53.9</span><span class="dr-n">Vingroup</span></div><div class="dr"><span class="dr-m">KDH</span><span class="dr-d">45.8</span><span class="dr-n">Bất động sản</span></div><div class="dr"><span class="dr-m">VJC</span><span class="dr-d">75.8</span><span class="dr-n">Vận tải</span></div><div class="dr"><span class="dr-m">FRT</span><span class="dr-d">51.4</span><span class="dr-n">Bán lẻ + Tiêu dùng</span></div><div class="dr"><span class="dr-m">CTD</span><span class="dr-d">73.1</span><span class="dr-n">Xây dựng</span></div><div class="dr"><span class="dr-m">DBC</span><span class="dr-d">55.4</span><span class="dr-n">Bán lẻ + Tiêu dùng</span></div><div class="dr last"><span class="dr-m">CTS</span><span class="dr-d">67.4</span><span class="dr-n">Chứng khoán</span></div><div class="dr dr-more last">+5 mã khác</div></div></div></div></section>
+<p class="xem-them">Chi tiết tham khảo tại <span>weha.com.vn</span></p>
+<footer class="foot"><div><b>WeHa - Wealth and Happiness</b> · weha.com.vn<br>Kỷ luật đầu tư bằng dữ liệu</div>
+<div class="r"><span>Nguồn: Nhiệt kế thị trường, Ngành dẫn dắt và Tín hiệu WeHa, số sau phiên 26/11/2026.</span><span>Mô hình định lượng, không phải khuyến nghị đầu tư. Backtest là mô phỏng quá khứ.</span></div></footer>
+</main></body></html>
